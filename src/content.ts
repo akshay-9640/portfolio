@@ -1,0 +1,320 @@
+// All site text lives here. Edit this file only — components just render it.
+
+export type Heading = { before: string; accent: string };
+
+export const profile = {
+  firstName: "AKSHAY",
+  name: "Akshay Kumar Boddu",
+  headline: "Generative AI Engineer",
+  idTitle: "Generative AI Engineer | Agentic AI | RAG & LLM Evaluation",
+  location: "Orlando, FL",
+  eyebrow: "Agentic AI · LLM Applications · RAG & Evals",
+  tagline:
+    "I build production LLM agents for a top-10 U.S. commercial mortgage lender, from multi-agent workflows and RAG to evaluation and deployment.",
+  heroStats: [
+    { value: "95–98%", label: "extraction accuracy" },
+    { value: "8h → 5m", label: "loan-doc review" },
+    { value: "15+", label: "agents orchestrated" },
+  ],
+  bio: "~4 years in software engineering, 2+ building production LLM agent systems for a top-10 U.S. commercial mortgage lender. I design multi-agent workflows (LangGraph/LangChain, 15+ agents), RAG pipelines, LLM evaluation frameworks, and MCP-based tool integrations. My agents reach 95–98% extraction accuracy and cut loan-document review from ~8 hours to ~5 minutes.",
+  badgeTech: ["Python", "LangGraph", "FastAPI", "Azure"],
+  photo: "/photos/akshay.jpg",
+  roles: ["Agentic AI", "LLM Applications", "RAG Pipelines", "LLM Evaluation", "MCP Integrations"],
+  pillars: [
+    {
+      title: "Agents that ship",
+      text: "Multi-agent LangGraph/LangChain workflows with human-in-the-loop review, taken from POC through UAT to production.",
+    },
+    {
+      title: "Retrieval that's accurate",
+      text: "RAG over large enterprise document sets with Azure AI Search, FAISS and Chroma, using semantic chunking and hybrid search.",
+    },
+    {
+      title: "Evals you can trust",
+      text: "Ground-truth test sets, prompt regression tests and structured-output validation, reaching 95–98% accuracy against a 90% target.",
+    },
+  ],
+  resume: "/resume.pdf",
+};
+
+export const nav = [
+  { label: "About", href: "#about" },
+  { label: "Stack", href: "#stack" },
+  { label: "Projects", href: "#projects" },
+  { label: "Process", href: "#process" },
+  { label: "Certifications", href: "#certifications" },
+  { label: "Experience", href: "#experience" },
+  { label: "Achievements", href: "#achievements" },
+  { label: "Contact", href: "#contact" },
+];
+
+export const headings: Record<string, Heading> = {
+  about: { before: "Hi, I'm", accent: "Akshay." },
+  stack: { before: "The periodic table", accent: "of my stack." },
+  projects: { before: "Things I've", accent: "built." },
+  process: { before: "How I", accent: "work." },
+  certifications: { before: "Always", accent: "learning." },
+  experience: { before: "Education &", accent: "experience." },
+  achievements: { before: "Proud", accent: "moments." },
+  contact: { before: "Let's", accent: "connect." },
+};
+
+export const categories = [
+  "Languages",
+  "AI/ML",
+  "LLMs",
+  "Frameworks",
+  "Data",
+  "DevOps",
+  "Cloud",
+] as const;
+export type Category = (typeof categories)[number];
+
+export const skills: { sym: string; name: string; cat: Category }[] = [
+  { sym: "Py", name: "Python", cat: "Languages" },
+  { sym: "Jv", name: "Java", cat: "Languages" },
+  { sym: "Sq", name: "SQL", cat: "Languages" },
+  { sym: "C", name: "C", cat: "Languages" },
+  { sym: "Ht", name: "HTML/CSS", cat: "Languages" },
+  { sym: "Ag", name: "Agentic AI", cat: "AI/ML" },
+  { sym: "Ma", name: "Multi-Agent", cat: "AI/ML" },
+  { sym: "Rg", name: "RAG", cat: "AI/ML" },
+  { sym: "Le", name: "LLM Evals", cat: "AI/ML" },
+  { sym: "Mc", name: "MCP", cat: "AI/ML" },
+  { sym: "Lc", name: "LangChain", cat: "Frameworks" },
+  { sym: "Lg", name: "LangGraph", cat: "Frameworks" },
+  { sym: "Ls", name: "LangSmith", cat: "Frameworks" },
+  { sym: "Cr", name: "CrewAI", cat: "Frameworks" },
+  { sym: "Gp", name: "GPT-4o", cat: "LLMs" },
+  { sym: "Cl", name: "Claude", cat: "LLMs" },
+  { sym: "Ll", name: "Llama·Groq", cat: "LLMs" },
+  { sym: "Fa", name: "FastAPI", cat: "Frameworks" },
+  { sym: "Re", name: "React.js", cat: "Frameworks" },
+  { sym: "Pw", name: "Playwright", cat: "Frameworks" },
+  { sym: "St", name: "Streamlit", cat: "Frameworks" },
+  { sym: "Pg", name: "PostgreSQL", cat: "Data" },
+  { sym: "My", name: "MySQL", cat: "Data" },
+  { sym: "Mg", name: "MongoDB", cat: "Data" },
+  { sym: "Sl", name: "SQLite", cat: "Data" },
+  { sym: "Ss", name: "SQL Server", cat: "Data" },
+  { sym: "Pd", name: "pandas·NumPy", cat: "Data" },
+  { sym: "Sk", name: "sklearn", cat: "Data" },
+  { sym: "Fs", name: "FAISS", cat: "Data" },
+  { sym: "Ch", name: "Chroma", cat: "Data" },
+  { sym: "Az", name: "AI Search", cat: "Data" },
+  { sym: "Dk", name: "Docker", cat: "DevOps" },
+  { sym: "K8", name: "Kubernetes", cat: "DevOps" },
+  { sym: "Gt", name: "Git", cat: "DevOps" },
+  { sym: "Gh", name: "GH Actions", cat: "DevOps" },
+  { sym: "Gl", name: "GitLab CI", cat: "DevOps" },
+  { sym: "Ad", name: "Az DevOps", cat: "DevOps" },
+  { sym: "Jk", name: "Jenkins", cat: "DevOps" },
+  { sym: "Aw", name: "AWS", cat: "Cloud" },
+  { sym: "Au", name: "Azure", cat: "Cloud" },
+  { sym: "Id", name: "Entra·OAuth2", cat: "Cloud" },
+];
+
+export const projects: {
+  title: string;
+  status: string;
+  description: string;
+  tags: string[];
+  github?: string;
+  flow: string[];
+  study: { problem: string; solution: string; result: string };
+}[] = [
+  {
+    title: "Service Action Request (SER) Agent",
+    status: "Deloitte · Production",
+    description:
+      "Sole-built LLM agent app that drafts underwriting briefs, replacing a ~150-minute manual process.",
+    tags: ["LangGraph", "MCP", "FastAPI", "Azure"],
+    flow: ["Servicer request", "Agent drafts brief", "Underwriter review", "Decision", "MCP server → client apps"],
+    study: {
+      problem:
+        "Underwriters spent ~150 minutes per loan-servicer request (such as repair-escrow extensions) assembling a brief by hand.",
+      solution:
+        "An LLM agent workflow drafts the underwriting brief from the request. It is being packaged as an MCP server so the client's production apps can call the agents as tools; the first integration is into an existing production application.",
+      result:
+        "Projected ~1,000 hours and ~$117K saved per year on repair-escrow extensions alone (40% efficiency gain for 15–20 underwriters; ~$290K total opportunity).",
+    },
+  },
+  {
+    title: "Multi-Document Reconciliation Agent",
+    status: "Deloitte · Production",
+    description:
+      "Reconciles ESA, PCA, appraisal and zoning reports (150–200 pages each) into one structured output.",
+    tags: ["LangChain", "RAG", "LLM Evals", "LangSmith"],
+    flow: ["4 reports (150–200 pp each)", "Extract + chunk", "Reconcile across docs", "Validate vs ground truth", "One structured output"],
+    study: {
+      problem:
+        "Reviewing environmental, property-condition, appraisal and zoning reports for one loan took ~8 hours.",
+      solution:
+        "An extraction-and-reconciliation agent in the team's 15+ agent LangGraph orchestration layer, with business-defined ground truth, prompt regression tests and LangSmith tracing.",
+      result:
+        "Per-loan review dropped from ~8 hours to ~5 minutes at 95–98% extraction accuracy against a 90% target.",
+    },
+  },
+  {
+    title: "AI-Adoption Dashboard",
+    status: "Deloitte · Production",
+    description:
+      "Tracks GitHub Copilot and Amazon Q usage across 5 business units, with an LLM chatbot on top.",
+    tags: ["Python", "LLM Chatbot", "Dashboards"],
+    flow: ["Usage report upload", "Per-unit metrics", "Compare + flag inactive users", "LLM chatbot Q&A"],
+    study: {
+      problem:
+        "The client's VP had no single view of how AI coding tools were being adopted across business units.",
+      solution:
+        "Built as sole developer: leaders upload usage reports, compare units and flag inactive users, and an LLM chatbot answers questions about the data in natural language.",
+      result: "One place to see adoption across 5 business units without reading through charts.",
+    },
+  },
+  {
+    title: "Computer-Use Automation System",
+    status: "Personal · Open source",
+    description:
+      "An LLM agent discovers a UI flow once and compiles it into a typed, deterministically replayable capability for legacy back-office apps.",
+    tags: ["Claude", "Playwright", "Flask", "Pydantic"],
+    github: "https://github.com/akshay-9640/interface-ai-computeruse",
+    flow: ["Claude discovers flow", "Capability artifact (typed, versioned)", "Replay with no LLM", "Escalate to human on risk"],
+    study: {
+      problem:
+        "Back-office apps are legacy-styled, have no test IDs and no APIs, so each step needs a person or a brittle script.",
+      solution:
+        "A Claude tool-calling agent explores a mock banking app once, with login handled by the harness and the irreversible final click gated. Its trace is compiled into a Pydantic-typed artifact that replays deterministically with an error taxonomy, allowlist guardrails, redaction and human escalation on the same live browser session.",
+      result:
+        "Replay needs no LLM and no API key. Business outcomes like 'member not found' return as results rather than crashes, and restricted accounts escalate to an operator instead of failing.",
+    },
+  },
+  {
+    title: "Personal Job Agent",
+    status: "Personal · Open source",
+    description:
+      "Self-hosted FastAPI app: Claude tailors a resume and answers for a posting, Playwright fills the real form, and you review before submitting.",
+    tags: ["Claude API", "FastAPI", "Playwright", "Greenhouse", "Lever"],
+    github: "https://github.com/akshay-9640/Personal-job-agent",
+    flow: ["Add job posting", "Claude scores + tailors", "Playwright fills form (dry run)", "Screenshot review", "You submit"],
+    study: {
+      problem: "Manually submitting ~20 applications a day is slow, and most of the effort is re-typing the same answers.",
+      solution:
+        "Haiku scores the match and Sonnet tailors the resume, cover letter and custom answers without inventing facts. A shared DOM scanner fills Greenhouse and Lever forms (Workday is partial). Radio and checkbox questions such as work authorization are never auto-answered.",
+      result:
+        "Nothing auto-submits by default; DRY_RUN and ALLOW_REAL_SUBMIT flags control it, so a wrong guess never reaches an employer.",
+    },
+  },
+  {
+    title: "LinkedIn Job Application Agent",
+    status: "2026",
+    description:
+      "Reads a resume from Google Drive, scores jobs with a Groq-hosted Llama 3.3, and tracks everything in a Streamlit dashboard.",
+    tags: ["Playwright", "Groq", "SQLite", "Streamlit", "APScheduler"],
+    github: "https://github.com/akshay-9640/linkedin-job-agent",
+    flow: ["Resume (Google Drive)", "Llama extracts skills", "Scrape + score 0–100", "Apply if ≥ 65", "SQLite + dashboard"],
+    study: {
+      problem: "Finding relevant postings and tracking where each application stands is manual work.",
+      solution:
+        "A pipeline of four agents runs on a six-hour schedule: skills extraction, job discovery, LLM scoring against a weighted rubric, and Playwright form filling. Guards include a daily cap, a dry-run mode, a score threshold and human-like delays.",
+      result: "An end-to-end pipeline from resume to tracked application, with every step logged in SQLite.",
+    },
+  },
+];
+
+export const workflow = [
+  { step: "Discover", text: "~50% of my time: sit with product managers and underwriters to decide which decisions AI automates and which stay human-reviewed." },
+  { step: "Prototype", text: "A working agent on real documents early, so feedback is about behavior, not slides." },
+  { step: "Evaluate", text: "Business-defined ground truth (10–50 labeled documents per agent), prompt regression tests and structured-output validation before anything ships." },
+  { step: "Demo & UAT", text: "Live demos with the people who'll use it; their feedback goes in before production." },
+  { step: "Ship & document", text: "FastAPI + Docker behind Entra ID/OAuth2, CI/CD, plus architecture docs and production-readiness notes." },
+];
+
+export const impact = [
+  { label: "Underwriting brief (SER)", before: "~150 min", after: "agent draft" },
+  { label: "Multi-report loan review", before: "~8 hrs", after: "~5 min" },
+  { label: "Form 1005 processing", before: "15–20 min", after: "~2 min" },
+  { label: "Form 1006 processing", before: "4–8 hrs", after: "3–5 min" },
+];
+
+export const certifications: { name: string; issuer: string }[] = [
+  { name: "AB-100: Agentic AI Business Solutions Architect", issuer: "Microsoft" },
+  { name: "PL-400: Power Platform Developer Associate", issuer: "Microsoft" },
+  { name: "Azure AI Engineer Associate", issuer: "Microsoft" },
+  { name: "Cloud Practitioner", issuer: "AWS" },
+];
+
+export const timeline: {
+  title: string;
+  org: string;
+  when: string;
+  bullets: string[];
+}[] = [
+  {
+    title: "Solution Analyst (AI & Enterprise Platform Engineering)",
+    org: "Deloitte · Lake Mary, FL",
+    when: "Jul 2024 – Present",
+    bullets: [
+      "Sole developer of the Service Action Request (SER) agent app for a top-10 U.S. commercial mortgage lender, replacing a ~150-minute manual process (projected ~1,000 hours and ~$117K saved per year). Packaging it as an MCP server for the client's production applications.",
+      "Built a multi-document reconciliation agent for ESA, PCA, appraisal and zoning reports (150–200 pages each), cutting per-loan review from ~8 hours to ~5 minutes.",
+      "Delivered extraction agents for loan forms 1005 and 1006 with human-in-the-loop review for unstructured sections: 1005 from ~15–20 min to ~2 min, 1006 from 4–8 hrs to 3–5 min.",
+      "Built LLM evaluation frameworks (10–50 human-labeled documents per agent, prompt regression testing, structured-output validation), reaching 95–98% accuracy against a 90% target.",
+      "Integrated the agents into a 15+ agent LangGraph/LangChain layer (4-person team) and used LangSmith tracing to debug and tune multi-agent runs.",
+      "Designed RAG architectures with Azure AI Search, FAISS, Chroma, semantic chunking and hybrid search; benchmarked GPT-4o, Claude, Llama and Groq per task on accuracy, latency and cost.",
+      "Built FastAPI services in Docker secured with Entra ID, OAuth2 and JWT; built AWS (S3, Lambda, Glue, Redshift) and Azure (ADF, Synapse) data pipelines; automated delivery with GitHub Actions, GitLab CI, Azure DevOps and Jenkins.",
+      "Sole developer of an AI-adoption dashboard (GitHub Copilot and Amazon Q usage across 5 business units) with an LLM chatbot for natural-language queries.",
+      "Spent ~50% of time in discovery with product managers and business teams, led live demos and UAT with underwriters, and wrote architecture documentation and production-readiness recommendations.",
+    ],
+  },
+  {
+    title: "Assistant System Engineer",
+    org: "TCS (Tata Consultancy Services) · Bangalore, India",
+    when: "May 2021 – Aug 2022",
+    bullets: [
+      "Developed enterprise financial platform features with React.js and JavaScript alongside architects and cross-functional Agile teams.",
+      "Delivered scalable features that improved performance and quality and reduced post-release defects.",
+      "Took part in design discussions, API integrations, testing and CI/CD for large-scale banking applications.",
+    ],
+  },
+  {
+    title: "Software Developer",
+    org: "Gramtarang Inclusive Development · Visakhapatnam, India",
+    when: "Aug 2020 – May 2021",
+    bullets: [
+      "Developed healthcare CRM modules for patient registration, electronic health records and regulated healthcare data workflows.",
+      "Worked with stakeholders to deliver web solutions for secure patient data management.",
+    ],
+  },
+];
+
+export const education = [
+  {
+    degree: "M.S. Computer and Information Sciences",
+    school: "Florida International University · Miami, FL",
+    when: "Apr 2024",
+  },
+  {
+    degree: "B.Tech Computer Science Engineering",
+    school: "Centurion University · Visakhapatnam, India",
+    when: "May 2021",
+  },
+];
+
+export const gallery = [
+  { src: "/photos/fiu-1.jpg", alt: "Akshay at his FIU graduation with his diploma" },
+  { src: "/photos/fiu-2.jpg", alt: "Akshay in FIU graduation regalia in front of the FIU backdrop" },
+  { src: "/photos/fiu-3.jpg", alt: "Akshay at his FIU graduation" },
+];
+
+export const achievements = [
+  { value: "95–98%", label: "extraction accuracy vs. 90% target" },
+  { value: "8h → 5m", label: "loan-document review time" },
+  { value: "$117K", label: "projected annual savings from SER" },
+  { value: "15+", label: "agents in the orchestration layer" },
+  { value: "~4", label: "years in software engineering" },
+];
+
+export const contact = {
+  email: "akshaykumarboddu019@gmail.com",
+  linkedin: "https://www.linkedin.com/in/bodduakshaykumar",
+  location: "Orlando, FL",
+  github: "https://github.com/akshay-9640",
+};
