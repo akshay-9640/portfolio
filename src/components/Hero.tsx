@@ -43,27 +43,19 @@ export default function Hero() {
       id="top"
       className="relative flex min-h-screen items-center overflow-hidden px-5 pb-16 pt-28 sm:px-8"
     >
-      <span
-        aria-hidden
-        className="text-outline pointer-events-none absolute inset-x-0 top-[58%] -translate-y-1/2 select-none text-center font-serif text-[22vw] font-extrabold leading-none"
-      >
-        {profile.firstName}
-      </span>
-
       <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-12 md:grid-cols-[1.3fr_1fr]">
         <div className="flex flex-col gap-7">
           <motion.p
             {...fade(0.1)}
-            className="font-mono text-xs uppercase tracking-[0.2em] text-accent"
+            className="font-mono text-xs uppercase tracking-[0.12em] text-ink/60"
           >
-            <span className="mr-2 inline-block h-2 w-2 animate-pulse rounded-full bg-accent" />
             {typed}
-            <span className="ml-0.5 animate-pulse">|</span>
+            <span aria-hidden className="ml-0.5 text-ink/40">|</span>
           </motion.p>
 
           <motion.h1
             {...fade(0.2)}
-            className="max-w-[10ch] font-serif text-5xl font-bold leading-[0.95] sm:text-7xl md:text-8xl"
+            className="max-w-[10ch] font-display text-5xl font-bold leading-[0.95] tracking-[-0.035em] sm:text-7xl md:text-8xl"
           >
             {profile.headline}
           </motion.h1>
@@ -75,20 +67,20 @@ export default function Hero() {
           <motion.div {...fade(0.5)} className="flex flex-wrap gap-3">
             <a
               href="#projects"
-              className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-paper transition hover:-translate-y-0.5"
+              className="rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition duration-100 hover:bg-white active:scale-[0.97]"
             >
               View my work
             </a>
             <a
               href={profile.resume}
               download
-              className="rounded-full border border-ink/40 px-6 py-3 text-sm font-medium transition hover:-translate-y-0.5 hover:border-accent hover:text-accent"
+              className="rounded-full border border-ink/25 px-6 py-3 text-sm font-medium transition duration-100 hover:border-ink/60 active:scale-[0.97]"
             >
-              Download résumé
+              Download Resume
             </a>
             <a
               href="#contact"
-              className="rounded-full border border-ink/40 px-6 py-3 text-sm font-medium transition hover:-translate-y-0.5 hover:border-accent hover:text-accent"
+              className="rounded-full border border-ink/25 px-6 py-3 text-sm font-medium transition duration-100 hover:border-ink/60 active:scale-[0.97]"
             >
               Let's talk
             </a>
@@ -96,14 +88,14 @@ export default function Hero() {
 
           <motion.dl
             {...fade(0.7)}
-            className="mt-2 grid max-w-md grid-cols-3 gap-4 border-t border-ink/15 pt-6"
+            className="mt-2 grid max-w-md grid-cols-3 gap-4 border-t border-ink/10 pt-6"
           >
             {profile.heroStats.map((s) => (
               <div key={s.label}>
-                <dt className="font-serif text-2xl font-bold text-accent sm:text-3xl">
+                <dt className="font-display text-2xl font-bold tracking-[-0.02em] sm:text-3xl">
                   {s.value}
                 </dt>
-                <dd className="mt-1 text-[11px] uppercase tracking-wider text-ink/60">
+                <dd className="mt-1 text-xs text-ink/55">
                   {s.label}
                 </dd>
               </div>
@@ -117,14 +109,12 @@ export default function Hero() {
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="relative mx-auto w-full max-w-xs md:max-w-sm"
         >
-          <div className="absolute -inset-3 rounded-[2rem] border border-accent/40" aria-hidden />
-          <div className="absolute -bottom-5 -right-5 h-full w-full rounded-[2rem] bg-accent/15" aria-hidden />
           <img
             src={profile.photo}
             alt={`Portrait of ${profile.name}`}
-            className="relative aspect-[3/4] w-full rounded-[1.6rem] object-cover object-top"
+            className="relative aspect-[3/4] w-full rounded-[28px] object-cover object-top ring-1 ring-ink/10"
           />
-          <div className="absolute -bottom-4 left-4 rounded-full border border-accent/50 bg-paper/90 px-4 py-2 font-mono text-[11px] uppercase tracking-wider text-accent backdrop-blur">
+          <div className="absolute bottom-4 left-4 rounded-full bg-paper/60 px-3.5 py-1.5 text-xs font-medium text-ink backdrop-blur-xl backdrop-saturate-150">
             {profile.location}
           </div>
         </motion.div>

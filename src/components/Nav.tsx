@@ -16,19 +16,19 @@ export default function Nav() {
   }, []);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-ink/10 bg-paper/80 backdrop-blur">
+    <header className="fixed inset-x-0 top-0 z-50 bg-paper/70 backdrop-blur-xl backdrop-saturate-150">
       <nav
         aria-label="Primary"
         className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8"
       >
-        <a href="#top" className="font-serif text-lg font-extrabold">
+        <a href="#top" className="font-display text-lg font-bold tracking-[-0.01em]">
           {profile.name}
         </a>
 
-        <ul className="hidden gap-6 text-sm lg:flex">
+        <ul className="hidden gap-6 text-sm text-ink/70 lg:flex">
           {nav.map((n) => (
             <li key={n.href}>
-              <a href={n.href} className="transition hover:text-accent">
+              <a href={n.href} className="transition-colors hover:text-ink">
                 {n.label}
               </a>
             </li>
@@ -36,7 +36,7 @@ export default function Nav() {
         </ul>
 
         <button
-          className="rounded-full border border-ink px-4 py-1.5 text-sm lg:hidden"
+          className="rounded-full border border-ink/30 px-4 py-1.5 text-sm transition-transform duration-100 active:scale-[0.97] lg:hidden"
           aria-expanded={open}
           aria-controls="mobile-menu"
           onClick={() => setOpen((o) => !o)}
@@ -47,14 +47,14 @@ export default function Nav() {
 
       <div
         aria-hidden
-        className="absolute inset-x-0 bottom-0 h-0.5 origin-left bg-accent"
+        className="absolute inset-x-0 bottom-0 h-px origin-left bg-ink/40"
         style={{ transform: `scaleX(${progress})` }}
       />
 
       {open && (
         <ul
           id="mobile-menu"
-          className="border-t border-ink/10 bg-paper px-5 py-4 lg:hidden"
+          className="bg-paper/95 px-5 py-4 lg:hidden"
         >
           {nav.map((n) => (
             <li key={n.href}>

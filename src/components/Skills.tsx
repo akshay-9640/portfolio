@@ -37,18 +37,18 @@ function evidenceFor(tool: Tool): Evidence[] {
 
 function Panel({ tool, layer, evidence }: { tool: Tool; layer: string; evidence: Evidence[] }) {
   return (
-    <div className="rounded-2xl border border-accent/50 bg-card p-5">
-      <p className="font-mono text-[11px] uppercase tracking-widest text-ink/50">{layer}</p>
-      <h3 className="mt-1 font-serif text-2xl font-bold text-accent">{tool.name}</h3>
+    <div className="rounded-2xl border border-ink/15 bg-card p-5">
+      <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-ink/50">{layer}</p>
+      <h3 className="mt-1 font-display text-2xl font-bold tracking-[-0.02em]">{tool.name}</h3>
       {evidence.length ? (
         <>
           <p className="mt-1 text-xs text-ink/60">
             Used in {evidence.length} {evidence.length === 1 ? "place" : "places"}
           </p>
-          <ul className="mt-4 space-y-4">
+          <ul className="mt-4 divide-y divide-ink/10">
             {evidence.map((e) => (
-              <li key={e.title} className="border-l-2 border-accent/60 pl-3">
-                <p className="font-mono text-[10px] uppercase tracking-widest text-ink/50">{e.kind}</p>
+              <li key={e.title} className="py-3 first:pt-0 last:pb-0">
+                <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-ink/50">{e.kind}</p>
                 <p className="text-sm font-semibold">{e.title}</p>
                 <p className="mt-1 text-xs leading-relaxed text-ink/70">{e.snippet}</p>
               </li>
@@ -83,7 +83,7 @@ export default function Skills() {
 
       <div className="grid gap-8 md:grid-cols-[1fr_20rem]">
         <ol className="relative space-y-3">
-          <span aria-hidden className="absolute bottom-6 left-[1.1rem] top-6 w-px bg-accent/25" />
+          <span aria-hidden className="absolute bottom-6 left-[1.1rem] top-6 w-px bg-ink/10" />
           {stackLayers.map((l, li) => {
             const active = sel.layer === li;
             return (
@@ -97,18 +97,18 @@ export default function Skills() {
               >
                 <span
                   className={`relative z-10 mt-4 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border font-mono text-xs transition-colors ${
-                    active ? "border-accent bg-accent text-paper" : "border-accent/50 bg-paper text-accent"
+                    active ? "border-ink bg-ink text-paper" : "border-ink/20 bg-paper text-ink/60"
                   }`}
                 >
                   {String(li + 1).padStart(2, "0")}
                 </span>
                 <div
                   className={`flex-1 rounded-2xl border p-4 transition-colors ${
-                    active ? "border-accent/60 bg-card" : "border-ink/15 bg-card/60"
+                    active ? "border-ink/25 bg-card" : "border-ink/10 bg-card/60"
                   }`}
                 >
                   <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-                    <h3 className="font-serif text-lg font-bold">{l.name}</h3>
+                    <h3 className="font-display text-lg font-bold tracking-[-0.01em]">{l.name}</h3>
                     <p className="text-xs text-ink/55">{l.role}</p>
                   </div>
                   <ul className="mt-3 flex flex-wrap gap-2">
@@ -121,15 +121,15 @@ export default function Skills() {
                             type="button"
                             aria-pressed={on}
                             onClick={() => setSel({ layer: li, tool: ti })}
-                            className={`flex items-center gap-2 rounded-full border px-3 py-1 text-xs transition ${
+                            className={`flex items-center gap-2 rounded-full border px-3 py-1 text-xs transition duration-100 active:scale-[0.97] ${
                               on
-                                ? "border-accent bg-accent text-paper"
-                                : "border-ink/25 hover:border-accent hover:text-accent"
+                                ? "border-ink bg-ink text-paper"
+                                : "border-ink/20 text-ink/80 hover:border-ink/50 hover:text-ink"
                             }`}
                           >
                             {t.name}
                             {n > 0 && (
-                              <span className={`font-mono text-[10px] ${on ? "text-paper/70" : "text-accent"}`}>
+                              <span className={`font-mono text-[11px] ${on ? "text-paper/60" : "text-ink/45"}`}>
                                 {n}
                               </span>
                             )}

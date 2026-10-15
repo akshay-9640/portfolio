@@ -25,38 +25,38 @@ export default function About() {
           }}
           aria-pressed={flipped}
           aria-label={flipped ? "Show front of ID card" : "Show back of ID card"}
-          className="perspective relative h-[460px] w-[300px] rounded-2xl text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:h-[480px] sm:w-[320px]"
+          className="perspective relative h-[460px] w-[300px] rounded-[28px] text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink sm:h-[480px] sm:w-[320px]"
         >
           <motion.div
             initial={false}
             animate={{ rotateY: flipped ? 180 : 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ type: "spring", bounce: 0, duration: 0.6 }}
             className="preserve-3d pointer-events-none absolute inset-0"
           >
             {/* Front */}
-            <div className="backface-hidden absolute inset-0 flex flex-col rounded-2xl border border-ink bg-card p-5 shadow-sm">
-              <div className="mx-auto mb-4 h-2 w-16 rounded-full bg-accent" />
+            <div className="backface-hidden absolute inset-0 flex flex-col rounded-[28px] border border-ink/15 bg-card p-4">
+              <div className="mx-auto mb-4 h-1.5 w-14 rounded-full bg-ink/20" />
               <img
                 src={profile.photo}
                 alt={`Portrait of ${profile.name}`}
-                className="h-64 w-full rounded-lg border border-ink/20 bg-paper object-cover object-top"
+                className="h-64 w-full rounded-xl bg-paper object-cover object-top"
               />
-              <p className="mt-5 font-serif text-2xl font-extrabold">{profile.name}</p>
-              <p className="mt-1 text-xs uppercase tracking-widest text-ink/60">
+              <p className="mt-5 px-1 font-display text-2xl font-bold tracking-[-0.01em]">{profile.name}</p>
+              <p className="mt-1 px-1 text-xs uppercase tracking-[0.08em] text-ink/60">
                 {profile.headline}
               </p>
-              <p className="mt-auto text-xs text-ink/50">Hover or tap to flip</p>
+              <p className="mt-auto px-1 text-xs text-ink/50">Hover or tap to flip</p>
             </div>
 
             {/* Back */}
             <div
-              className="backface-hidden absolute inset-0 flex flex-col rounded-2xl border border-ink bg-accent p-6 text-paper"
+              className="backface-hidden absolute inset-0 flex flex-col rounded-[28px] bg-ink p-6 text-paper"
               style={{ transform: "rotateY(180deg)" }}
             >
-              <p className="text-[10px] uppercase tracking-[0.25em] opacity-60">
+              <p className="text-[11px] uppercase tracking-[0.12em] opacity-60">
                 Profile
               </p>
-              <p className="mt-3 font-serif text-2xl font-extrabold">{profile.name}</p>
+              <p className="mt-3 font-display text-2xl font-bold tracking-[-0.01em]">{profile.name}</p>
               <p className="mt-1 text-xs opacity-80">{profile.idTitle}</p>
               <p className="mt-1 text-xs opacity-80">{profile.location}</p>
               <p className="mt-4 text-[13px] leading-relaxed opacity-90">{profile.bio}</p>
@@ -64,7 +64,7 @@ export default function About() {
                 {profile.badgeTech.map((t) => (
                   <li
                     key={t}
-                    className="rounded-full border border-paper/50 px-3 py-1 text-[11px]"
+                    className="rounded-full border border-paper/25 px-3 py-1 text-[11px]"
                   >
                     {t}
                   </li>
@@ -76,9 +76,9 @@ export default function About() {
         <ul className="mt-6 grid w-full gap-4 md:grid-cols-3">
           {profile.pillars.map((p, i) => (
             <Reveal key={p.title} delay={i * 0.1}>
-              <li className="h-full rounded-2xl border border-ink/20 bg-card p-6">
-                <p className="font-mono text-xs text-accent">0{i + 1}</p>
-                <h3 className="mt-3 font-serif text-xl font-bold">{p.title}</h3>
+              <li className="h-full rounded-2xl border border-ink/10 bg-card p-6">
+                <p className="font-mono text-xs text-ink/40">0{i + 1}</p>
+                <h3 className="mt-3 font-display text-xl font-bold tracking-[-0.01em]">{p.title}</h3>
                 <p className="mt-2 text-sm text-ink/70">{p.text}</p>
               </li>
             </Reveal>

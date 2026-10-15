@@ -3,7 +3,7 @@ import { nav, profile } from "../content";
 
 const actions = [
   ...nav.map((n) => ({ label: `Go to ${n.label}`, run: () => (location.hash = n.href) })),
-  { label: "Download résumé", run: () => window.open(profile.resume, "_blank") },
+  { label: "Download Resume", run: () => window.open(profile.resume, "_blank") },
 ];
 
 // Cmd/Ctrl+K quick-jump menu.
@@ -36,7 +36,7 @@ export default function Palette() {
       <div
         role="dialog"
         aria-label="Quick jump"
-        className="w-full max-w-md overflow-hidden rounded-xl border border-accent/50 bg-card shadow-2xl"
+        className="w-full max-w-md overflow-hidden rounded-2xl border border-ink/15 bg-card shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <input
@@ -56,7 +56,7 @@ export default function Palette() {
           {list.map((a) => (
             <li key={a.label}>
               <button
-                className="w-full px-4 py-2 text-left text-sm hover:bg-accent/10 hover:text-accent"
+                className="w-full px-4 py-2 text-left text-sm text-ink/80 hover:bg-ink/5 hover:text-ink"
                 onClick={() => {
                   a.run();
                   setOpen(false);

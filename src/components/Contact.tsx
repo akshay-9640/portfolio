@@ -3,9 +3,9 @@ import { contact, headings, profile } from "../content";
 import Section from "./Section";
 
 const btn =
-  "rounded-full border border-ink/40 px-6 py-3 text-sm font-medium transition hover:-translate-y-0.5 hover:border-accent hover:text-accent";
+  "rounded-full border border-ink/25 px-6 py-3 text-sm font-medium transition duration-100 hover:border-ink/60 active:scale-[0.97]";
 const field =
-  "w-full rounded-lg border border-ink/25 bg-card px-4 py-3 text-sm outline-none transition focus:border-accent";
+  "w-full rounded-xl border border-ink/15 bg-card px-4 py-3 text-sm outline-none transition-colors placeholder:text-ink/40 focus:border-ink/50";
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
@@ -42,7 +42,7 @@ export default function Contact() {
               {contact.location}
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
-              <button type="button" onClick={copy} className={`${btn} bg-accent !border-accent text-paper hover:!text-paper`}>
+              <button type="button" onClick={copy} className={`${btn} !border-ink bg-ink font-semibold text-paper hover:bg-white`}>
                 {copied ? "Copied" : `Copy ${contact.email}`}
               </button>
               <a href={contact.linkedin} target="_blank" rel="noreferrer" className={btn}>
@@ -52,7 +52,7 @@ export default function Contact() {
                 GitHub ↗
               </a>
               <a href={profile.resume} download className={btn}>
-                Download résumé
+                Download Resume
               </a>
             </div>
           </div>
@@ -61,7 +61,7 @@ export default function Contact() {
             <input name="name" required placeholder="Your name" aria-label="Your name" className={field} />
             <input name="email" type="email" required placeholder="Your email" aria-label="Your email" className={field} />
             <textarea name="message" required rows={4} placeholder="Message" aria-label="Message" className={field} />
-            <button type="submit" className={`${btn} bg-accent !border-accent text-paper hover:!text-paper`}>
+            <button type="submit" className={`${btn} !border-ink bg-ink font-semibold text-paper hover:bg-white`}>
               Send message
             </button>
           </form>

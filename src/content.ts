@@ -48,7 +48,7 @@ export const nav = [
 ];
 
 export const headings: Record<string, Heading> = {
-  about: { before: "Hi, I'm", accent: "Akshay." },
+  about: { before: "Hi, I'm", accent: "Akshay Kumar." },
   stack: { before: "The stack behind", accent: "my systems." },
   projects: { before: "Things I've", accent: "built." },
   process: { before: "How I", accent: "work." },
@@ -152,6 +152,7 @@ export const projects: {
   description: string;
   tags: string[];
   github?: string;
+  live?: string;
   flow: string[];
   study: { problem: string; solution: string; result: string };
 }[] = [
@@ -209,6 +210,7 @@ export const projects: {
       "An LLM agent discovers a UI flow once and compiles it into a typed, deterministically replayable capability for legacy back-office apps.",
     tags: ["Claude", "Playwright", "Flask", "Pydantic"],
     github: "https://github.com/akshay-9640/interface-ai-computeruse",
+    live: "https://interface-ai-computeruse.vercel.app/",
     flow: ["Claude discovers flow", "Capability artifact (typed, versioned)", "Replay with no LLM", "Escalate to human on risk"],
     study: {
       problem:
@@ -217,6 +219,24 @@ export const projects: {
         "A Claude tool-calling agent explores a mock banking app once, with login handled by the harness and the irreversible final click gated. Its trace is compiled into a Pydantic-typed artifact that replays deterministically with an error taxonomy, allowlist guardrails, redaction and human escalation on the same live browser session.",
       result:
         "Replay needs no LLM and no API key. Business outcomes like 'member not found' return as results rather than crashes, and restricted accounts escalate to an operator instead of failing.",
+    },
+  },
+  {
+    title: "Microfinance API for AI (MCP + Claude Assistant)",
+    status: "Personal | Open source",
+    description:
+      "A Spring Boot back-office API with an AI layer: an MCP server any AI client can plug into, and a Claude assistant that answers questions in plain English.",
+    tags: ["MCP", "Claude", "Spring Boot", "Python", "SQLite"],
+    github: "https://github.com/akshay-9640/microfinance-api",
+    live: "https://microfinance-api-ai.vercel.app/",
+    flow: ["Question in plain English", "Claude picks an MCP tool", "Read-only call to the API", "Answer from tool results only"],
+    study: {
+      problem:
+        "Back-office data sits behind a REST API that only developers can query, and AI clients have no safe, typed way to reach it.",
+      solution:
+        "An MCP server (MCP SDK 2.x, stdio and Streamable HTTP) exposes three read-only, validated tools over the Spring Boot API. A Claude-powered web chat is itself an MCP client of the same tools and shows every call it makes. Login and password endpoints are never exposed to AI.",
+      result:
+        "Two ways in with one set of tools: plug the server into Claude Desktop or Claude Code, or use the assistant app. Covered by 19 offline tests across Java and Python.",
     },
   },
   {

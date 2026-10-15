@@ -13,7 +13,7 @@ export default function Chat() {
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
   const [msgs, setMsgs] = useState<Msg[]>([
-    { role: "bot", text: "Hi, I'm Akshay's résumé assistant. Ask me about his projects, experience or stack." },
+    { role: "bot", text: "Hi, I'm Akshay's resume assistant. Ask me about his projects, experience or stack." },
   ]);
   const input = useRef<HTMLInputElement>(null);
   const end = useRef<HTMLDivElement>(null);
@@ -44,7 +44,7 @@ export default function Chat() {
           }
         : {
             role: "bot",
-            text: "I don't have that in Akshay's résumé. Try asking about his projects, Deloitte work, skills or certifications, or email him directly.",
+            text: "I don't have that in Akshay's resume. Try asking about his projects, Deloitte work, skills or certifications, or email him directly.",
             mode: "search",
           };
     }
@@ -61,7 +61,7 @@ export default function Chat() {
             setOpen(true);
             setTimeout(() => input.current?.focus(), 50);
           }}
-          className="fixed bottom-5 right-5 z-50 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-paper shadow-lg transition hover:-translate-y-0.5"
+          className="fixed bottom-5 right-5 z-50 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-paper shadow-lg shadow-black/40 transition duration-100 hover:bg-white active:scale-[0.97]"
         >
           Ask Akshay
         </button>
@@ -70,11 +70,11 @@ export default function Chat() {
         <div
           role="dialog"
           aria-label="Ask Akshay"
-          className="fixed bottom-5 right-5 z-50 flex h-[28rem] w-[calc(100vw-2.5rem)] max-w-sm flex-col overflow-hidden rounded-2xl border border-accent/50 bg-card shadow-2xl"
+          className="fixed bottom-5 right-5 z-50 flex h-[28rem] w-[calc(100vw-2.5rem)] max-w-sm flex-col overflow-hidden rounded-2xl border border-ink/15 bg-card shadow-2xl"
         >
           <div className="flex items-center justify-between border-b border-ink/10 px-4 py-3">
-            <span className="font-mono text-xs uppercase tracking-widest text-accent">Ask Akshay</span>
-            <button onClick={() => setOpen(false)} aria-label="Close chat" className="text-ink/60 hover:text-accent">
+            <span className="text-sm font-semibold">Ask Akshay</span>
+            <button onClick={() => setOpen(false)} aria-label="Close chat" className="text-ink/60 hover:text-ink">
               ✕
             </button>
           </div>
@@ -83,14 +83,14 @@ export default function Chat() {
               <div key={i} className={m.role === "user" ? "text-right" : ""}>
                 <p
                   className={`inline-block max-w-[90%] whitespace-pre-line rounded-xl px-3 py-2 text-left ${
-                    m.role === "user" ? "bg-accent text-paper" : "border border-ink/15 bg-paper text-ink/85"
+                    m.role === "user" ? "bg-ink text-paper" : "border border-ink/10 bg-paper text-ink/85"
                   }`}
                 >
                   {m.text}
                 </p>
                 {m.sources && m.sources.length > 0 && (
-                  <p className="mt-1 font-mono text-[10px] text-ink/45">
-                    {m.mode === "ai" ? "AI answer" : "Matched from résumé"}: {m.sources.slice(0, 2).join(", ")}
+                  <p className="mt-1 font-mono text-[11px] text-ink/45">
+                    {m.mode === "ai" ? "AI answer" : "Matched from resume"}: {m.sources.slice(0, 2).join(", ")}
                   </p>
                 )}
               </div>
@@ -101,14 +101,14 @@ export default function Chat() {
                   <button
                     key={s}
                     onClick={() => ask(s)}
-                    className="rounded-full border border-ink/30 px-3 py-1 text-xs hover:border-accent hover:text-accent"
+                    className="rounded-full border border-ink/20 px-3 py-1 text-xs text-ink/80 transition duration-100 hover:border-ink/50 hover:text-ink active:scale-[0.97]"
                   >
                     {s}
                   </button>
                 ))}
               </div>
             )}
-            {busy && <p className="font-mono text-xs text-accent">Thinking...</p>}
+            {busy && <p className="text-xs text-ink/50">Thinking...</p>}
             <div ref={end} />
           </div>
           <form
@@ -124,9 +124,9 @@ export default function Chat() {
               ref={input}
               placeholder="Ask about my work..."
               aria-label="Your question"
-              className="flex-1 rounded-lg border border-ink/25 bg-paper px-3 py-2 text-sm outline-none focus:border-accent"
+              className="flex-1 rounded-xl border border-ink/15 bg-paper px-3 py-2 text-sm outline-none transition-colors focus:border-ink/50"
             />
-            <button className="rounded-lg bg-accent px-4 text-sm font-semibold text-paper">Send</button>
+            <button className="rounded-xl bg-ink px-4 text-sm font-semibold text-paper transition duration-100 hover:bg-white active:scale-[0.97]">Send</button>
           </form>
         </div>
       )}

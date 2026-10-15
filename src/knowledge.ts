@@ -1,5 +1,5 @@
 // Grounding for the "Ask Akshay" chat. Built only from content.ts so the answers
-// can never drift from what the site (and résumé) say.
+// can never drift from what the site (and resume) say.
 import { certifications, contact, education, impact, profile, projects, stackLayers, timeline } from "./content";
 
 export type Chunk = { id: string; title: string; text: string };
