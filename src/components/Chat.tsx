@@ -5,7 +5,7 @@ type Msg = { role: "user" | "bot"; text: string; sources?: string[]; mode?: "ai"
 
 const suggestions = [
   "What has he built with LangGraph?",
-  "How did he get to 95–98% accuracy?",
+  "How did he reach 95-98% accuracy?",
   "What certifications does he have?",
 ];
 
@@ -63,7 +63,7 @@ export default function Chat() {
           }}
           className="fixed bottom-5 right-5 z-50 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-paper shadow-lg transition hover:-translate-y-0.5"
         >
-          Ask Akshay ✦
+          Ask Akshay
         </button>
       )}
       {open && (
@@ -90,7 +90,7 @@ export default function Chat() {
                 </p>
                 {m.sources && m.sources.length > 0 && (
                   <p className="mt-1 font-mono text-[10px] text-ink/45">
-                    {m.mode === "ai" ? "AI answer" : "Matched from résumé"} · {m.sources.slice(0, 2).join(" · ")}
+                    {m.mode === "ai" ? "AI answer" : "Matched from résumé"}: {m.sources.slice(0, 2).join(", ")}
                   </p>
                 )}
               </div>
@@ -108,7 +108,7 @@ export default function Chat() {
                 ))}
               </div>
             )}
-            {busy && <p className="font-mono text-xs text-accent">thinking…</p>}
+            {busy && <p className="font-mono text-xs text-accent">Thinking...</p>}
             <div ref={end} />
           </div>
           <form
@@ -122,7 +122,7 @@ export default function Chat() {
           >
             <input
               ref={input}
-              placeholder="Ask about my work…"
+              placeholder="Ask about my work..."
               aria-label="Your question"
               className="flex-1 rounded-lg border border-ink/25 bg-paper px-3 py-2 text-sm outline-none focus:border-accent"
             />

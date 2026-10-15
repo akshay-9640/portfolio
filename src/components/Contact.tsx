@@ -25,7 +25,7 @@ export default function Contact() {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
     const subject = `Portfolio message from ${f.get("name")}`;
-    const body = `${f.get("message")}\n\n— ${f.get("name")} (${f.get("email")})`;
+    const body = `${f.get("message")}\n\nFrom ${f.get("name")} (${f.get("email")})`;
     window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
@@ -43,7 +43,7 @@ export default function Contact() {
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
               <button type="button" onClick={copy} className={`${btn} bg-accent !border-accent text-paper hover:!text-paper`}>
-                {copied ? "Copied ✓" : `Copy ${contact.email}`}
+                {copied ? "Copied" : `Copy ${contact.email}`}
               </button>
               <a href={contact.linkedin} target="_blank" rel="noreferrer" className={btn}>
                 LinkedIn ↗

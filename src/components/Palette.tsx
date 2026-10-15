@@ -49,7 +49,7 @@ export default function Palette() {
               setOpen(false);
             }
           }}
-          placeholder="Jump to…"
+          placeholder="Jump to..."
           className="w-full border-b border-ink/15 bg-transparent px-4 py-3 text-sm outline-none"
         />
         <ul className="max-h-72 overflow-y-auto py-1">

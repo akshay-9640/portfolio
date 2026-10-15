@@ -1,20 +1,20 @@
 // Grounding for the "Ask Akshay" chat. Built only from content.ts so the answers
 // can never drift from what the site (and résumé) say.
-import { certifications, contact, education, impact, profile, projects, skills, timeline } from "./content";
+import { certifications, contact, education, impact, profile, projects, stackLayers, timeline } from "./content";
 
 export type Chunk = { id: string; title: string; text: string };
 
 export const chunks: Chunk[] = [
   { id: "about", title: "About Akshay", text: `${profile.name}, ${profile.headline}, based in ${profile.location}. ${profile.bio}` },
   ...timeline.flatMap((t) =>
-    t.bullets.map((b, i) => ({ id: `${t.org}-${i}`, title: `${t.title} — ${t.org} (${t.when})`, text: b }))
+    t.bullets.map((b, i) => ({ id: `${t.org}-${i}`, title: `${t.title}, ${t.org} (${t.when})`, text: b }))
   ),
   ...projects.map((p) => ({
     id: p.title,
     title: `Project: ${p.title}`,
     text: `${p.description} Tech: ${p.tags.join(", ")}. Problem: ${p.study.problem} Solution: ${p.study.solution} Result: ${p.study.result}${p.github ? ` Code: ${p.github}` : ""}`,
   })),
-  { id: "skills", title: "Skills", text: skills.map((s) => `${s.name} (${s.cat})`).join(", ") },
+  ...stackLayers.map((l) => ({ id: `stack-${l.name}`, title: `Skills: ${l.name}`, text: `${l.role} ${l.tools.map((t) => t.name).join(", ")}.` })),
   { id: "certs", title: "Certifications", text: certifications.map((c) => `${c.issuer} ${c.name}`).join("; ") },
   { id: "edu", title: "Education", text: education.map((e) => `${e.degree}, ${e.school}, ${e.when}`).join("; ") },
   { id: "impact", title: "Impact", text: impact.map((m) => `${m.label}: ${m.before} to ${m.after}`).join("; ") },

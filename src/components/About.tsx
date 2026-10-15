@@ -33,7 +33,7 @@ export default function About() {
               <p className="mt-1 text-xs uppercase tracking-widest text-ink/60">
                 {profile.headline}
               </p>
-              <p className="mt-auto text-xs text-ink/50">Tap or hover to flip ↻</p>
+              <p className="mt-auto text-xs text-ink/50">Hover or tap to flip</p>
             </div>
 
             {/* Back */}
@@ -42,7 +42,7 @@ export default function About() {
               style={{ transform: "rotateY(180deg)" }}
             >
               <p className="text-[10px] uppercase tracking-[0.25em] opacity-60">
-                ID · GenAI Engineer
+                Profile
               </p>
               <p className="mt-3 font-serif text-2xl font-extrabold">{profile.name}</p>
               <p className="mt-1 text-xs opacity-80">{profile.idTitle}</p>

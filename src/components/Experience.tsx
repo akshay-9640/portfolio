@@ -76,7 +76,7 @@ export default function Experience() {
             ))}
           </div>
           <p className="mt-3 text-center font-mono text-[11px] uppercase tracking-wider text-ink/50">
-            FIU Commencement · M.S. 2024
+            FIU Commencement, M.S. 2024
           </p>
         </Reveal>
       </div>
