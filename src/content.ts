@@ -244,30 +244,34 @@ export const projects: {
     status: "Personal | Open source",
     description:
       "Self-hosted FastAPI app: Claude tailors a resume and answers for a posting, Playwright fills the real form, and you review before submitting.",
-    tags: ["Claude API", "FastAPI", "Playwright", "Greenhouse", "Lever"],
+    tags: ["Claude API", "MCP", "FastAPI", "Playwright", "Docker"],
     github: "https://github.com/akshay-9640/Personal-job-agent",
+    live: "https://personal-job-agent-backend.vercel.app/",
     flow: ["Add job posting", "Claude scores + tailors", "Playwright fills form (dry run)", "Screenshot review", "You submit"],
     study: {
       problem: "Manually submitting about 20 applications a day is slow, and most of the effort is re-typing the same answers.",
       solution:
-        "Haiku scores the match and Sonnet tailors the resume, cover letter and custom answers without inventing facts. A shared DOM scanner fills Greenhouse and Lever forms (Workday is partial). Radio and checkbox questions such as work authorization are never auto-answered.",
+        "Haiku scores the match and Sonnet tailors the resume, cover letter and custom answers without inventing facts. A shared DOM scanner fills Greenhouse and Lever forms (Workday is partial). Radio and checkbox questions such as work authorization are never auto-answered. It runs as a private, single-user Docker instance behind a sign-in page, with a built-in MCP server so Claude Desktop or Claude Code can add jobs and tailor applications; form filling and submitting are deliberately left out of MCP.",
       result:
         "Nothing auto-submits by default; DRY_RUN and ALLOW_REAL_SUBMIT flags control it, so a wrong guess never reaches an employer.",
     },
   },
   {
-    title: "LinkedIn Job Application Agent",
-    status: "2026",
+    title: "Classwise",
+    status: "Personal | Open source",
     description:
-      "Reads a resume from Google Drive, scores jobs with a Groq-hosted Llama 3.3, and tracks everything in a Streamlit dashboard.",
-    tags: ["Playwright", "Groq", "SQLite", "Streamlit", "APScheduler"],
-    github: "https://github.com/akshay-9640/linkedin-job-agent",
-    flow: ["Resume (Google Drive)", "Llama extracts skills", "Scrape + score 0-100", "Apply if score is 65+", "SQLite + dashboard"],
+      "Claude writes exams from a syllabus and grades short answers against the teacher's rubric, with teacher and student portals and an MCP server.",
+    tags: ["Claude API", "MCP", "FastAPI", "Structured Outputs"],
+    github: "https://github.com/akshay-9640/classwise",
+    live: "https://classwise-kappa.vercel.app/",
+    flow: ["Syllabus in", "Claude drafts exam + rubrics", "Code checks, teacher edits", "Students answer", "Rubric-clamped grading + review queue"],
     study: {
-      problem: "Finding relevant postings and tracking where each application stands is manual work.",
+      problem:
+        "Writing exams and grading short answers by hand takes teachers hours per class, and an AI grader can drift from the rubric or be talked into full marks.",
       solution:
-        "A pipeline of four agents runs on a six-hour schedule: skills extraction, job discovery, LLM scoring against a weighted rubric, and Playwright form filling. Guards include a daily cap, a dry-run mode, a score threshold and human-like delays.",
-      result: "An end-to-end pipeline from resume to tracked application, with every step logged in SQLite.",
+        "Structured outputs return exams and grades as validated objects; the grading schema only allows the rubric's exact criteria, scores are clamped to the rubric, instructions hidden in answers are flagged, and multiple choice is graded in code. Teachers get a course portal with a review queue, students a Year 1 to 4 view of courses and scores, and a 13-tool MCP server runs it from Claude Desktop.",
+      result:
+        "In a recorded run, a prompt-injection answer scored 1 of 14 and was flagged for review, while simulated strong, average and struggling students scored 14, 9 and 2. Covered by 17 offline tests on a fake Claude client.",
     },
   },
 ];
