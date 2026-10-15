@@ -5,21 +5,33 @@ import Reveal from "./Reveal";
 import Section from "./Section";
 
 export default function About() {
-  const [flipped, setFlipped] = useState(false);
+  // Hover (mouse only) shows the back while the pointer is over the card. A click or
+  // tap flips to the other side and keeps it there. Hover is detected on the static
+  // button, never on the rotating face, so the card can't flicker mid-turn.
+  const [hovered, setHovered] = useState(false);
+  const [pinned, setPinned] = useState(false);
+  const flipped = hovered || pinned;
 
   return (
     <Section id="about" heading={headings.about}>
       <div className="flex flex-col items-center gap-6">
-        <div className="perspective">
-          <motion.button
-            type="button"
-            onClick={() => setFlipped((f) => !f)}
-            onHoverStart={() => setFlipped(true)}
-            onHoverEnd={() => setFlipped(false)}
+        <button
+          type="button"
+          onPointerEnter={(e) => e.pointerType === "mouse" && setHovered(true)}
+          onPointerLeave={(e) => e.pointerType === "mouse" && setHovered(false)}
+          onClick={() => {
+            setPinned(!flipped);
+            setHovered(false);
+          }}
+          aria-pressed={flipped}
+          aria-label={flipped ? "Show front of ID card" : "Show back of ID card"}
+          className="perspective relative h-[460px] w-[300px] rounded-2xl text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:h-[480px] sm:w-[320px]"
+        >
+          <motion.div
+            initial={false}
             animate={{ rotateY: flipped ? 180 : 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            aria-label="Flip ID card"
-            className="preserve-3d relative h-[460px] w-[300px] text-left sm:h-[480px] sm:w-[320px]"
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="preserve-3d pointer-events-none absolute inset-0"
           >
             {/* Front */}
             <div className="backface-hidden absolute inset-0 flex flex-col rounded-2xl border border-ink bg-card p-5 shadow-sm">
@@ -59,8 +71,8 @@ export default function About() {
                 ))}
               </ul>
             </div>
-          </motion.button>
-        </div>
+          </motion.div>
+        </button>
         <ul className="mt-6 grid w-full gap-4 md:grid-cols-3">
           {profile.pillars.map((p, i) => (
             <Reveal key={p.title} delay={i * 0.1}>
