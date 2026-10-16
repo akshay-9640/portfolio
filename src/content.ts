@@ -274,6 +274,24 @@ export const projects: {
         "In a recorded run, a prompt-injection answer scored 1 of 14 and was flagged for review, while simulated strong, average and struggling students scored 14, 9 and 2. Covered by 17 offline tests on a fake Claude client.",
     },
   },
+  {
+    title: "Pathwise",
+    status: "Personal | Open source",
+    description:
+      "A RAG course advisor that answers from the catalog, handbook and a student's record, where every statement cites a source and every quote is verified in code.",
+    tags: ["Claude API", "RAG", "MCP", "FastAPI", "Evals"],
+    github: "https://github.com/akshay-9640/pathwise",
+    live: "https://pathwise-bo18.vercel.app/",
+    flow: ["Student question", "Hybrid retrieval + rule checks", "Claude writes cited statements", "Code verifies every quote", "Answer with highlighted sources"],
+    study: {
+      problem:
+        "Students ask advisors the same questions about prerequisites, credit limits and clashes, and a chatbot answer is useless if nobody can check where it came from.",
+      solution:
+        "BM25 and local embeddings merged by rank fusion find catalog and handbook passages; eligibility, load, probation and timetable clashes are computed in code and name the rule they apply. Claude answers in statements that each cite a source with a quote, code locates every quote in its source, and the UI highlights the exact passage. An MCP server exposes the advisor and the rule checks to Claude Desktop.",
+      result:
+        "On a 36-question eval, hybrid retrieval found 99% of expected sources in the top 6 and beat a cross-encoder reranker, and 100% of quotes in Claude's answers were verified. The evals also caught answers whose quotes were real but whose claims were not, which led to code-computed course lists.",
+    },
+  },
 ];
 
 export const workflow = [
