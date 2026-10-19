@@ -1,5 +1,9 @@
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { profile } from "../content";
+import { HUBS, hubOf, isHub } from "../map";
+import MapDetail from "./MapDetail";
+import MapExplorer from "./MapExplorer";
 
 const fade = (delay: number) => ({
   initial: { opacity: 0, y: 24 },
@@ -8,13 +12,39 @@ const fade = (delay: number) => ({
 });
 
 export default function Hero() {
+  // The map and the pane beside it share one selection: null is the intro, otherwise a map node id.
+  const [selected, setSelected] = useState<string | null>(null);
+  const pane = useRef<HTMLDivElement>(null);
+  const select = (id: string | null) => {
+    setSelected(id);
+    pane.current?.scrollTo({ top: 0 });
+    // On small screens the pane sits above the map: bring it into view.
+    if (id && window.innerWidth < 768) pane.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+  useEffect(() => {
+    // Esc steps back: item to its hub, hub to the intro.
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape" || !selected || document.querySelector("dialog[open]")) return;
+      setSelected(selected === "root" || isHub(selected) ? null : hubOf(selected));
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [selected]);
+
   return (
     <section
       id="top"
       className="relative flex min-h-screen items-center overflow-hidden px-5 pb-16 pt-28 sm:px-8"
     >
-      <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-12 md:grid-cols-[1.3fr_1fr]">
-        <div className="flex flex-col gap-7">
+      <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-12 md:grid-cols-[1fr_1.25fr]">
+        <div ref={pane} className="scroll-mt-24 md:max-h-[640px] md:overflow-y-auto md:pr-2" aria-live="polite">
+        <AnimatePresence mode="wait" initial={false}>
+        {selected ? (
+          <motion.div key={selected} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2 }}>
+            <MapDetail id={selected} onSelect={select} />
+          </motion.div>
+        ) : (
+        <motion.div key="intro" className="flex flex-col gap-7" exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2 }}>
           <motion.p
             {...fade(0.1)}
             className="font-mono text-xs uppercase tracking-[0.12em] text-ink/60"
@@ -63,25 +93,29 @@ export default function Hero() {
               </div>
             ))}
           </motion.dl>
+
+          <motion.div {...fade(0.85)}>
+            <p className="text-xs font-medium uppercase tracking-[0.1em] text-ink/50">Explore the map</p>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {HUBS.map((h) => (
+                <button key={h.id} type="button" onClick={() => select(h.id)} className="rounded-full border border-ink/20 px-3 py-1 text-xs text-ink/80 transition duration-100 hover:border-ink/50 hover:text-ink active:scale-[0.97]">
+                  {h.label}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        </motion.div>
+        )}
+        </AnimatePresence>
         </div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.94 }}
+          initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          data-universe-anchor
-          className="relative mx-auto w-full max-w-xs cursor-grab touch-pan-y select-none active:cursor-grabbing md:max-w-sm"
         >
-          <div className="hero-photo-card relative">
-          <img
-            src={profile.photo}
-            alt={`Portrait of ${profile.name}`}
-            className="relative aspect-[3/4] w-full rounded-[28px] object-cover object-top ring-1 ring-ink/10"
-          />
-          <div className="absolute bottom-4 left-4 rounded-full bg-paper/60 px-3.5 py-1.5 text-xs font-medium text-ink backdrop-blur-xl backdrop-saturate-150">
-            {profile.location}
-          </div>
-          </div>
+          <MapExplorer selected={selected} onSelect={select} />
+          <p className="mt-2 text-center text-xs text-ink/45">Click my photo or any node to explore. Drag to rotate.</p>
         </motion.div>
       </div>
     </section>

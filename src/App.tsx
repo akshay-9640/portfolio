@@ -10,7 +10,6 @@ import Certifications from "./components/Certifications";
 import Experience from "./components/Experience";
 import Achievements from "./components/Achievements";
 import Contact from "./components/Contact";
-import Universe from "./components/Universe";
 
 export default function App() {
   return (
@@ -18,8 +17,7 @@ export default function App() {
       <Nav />
       <Palette />
       <Chat />
-      <Universe />
-      <main className="relative z-10">
+      <main>
         <Hero />
         <About />
         <Skills />
