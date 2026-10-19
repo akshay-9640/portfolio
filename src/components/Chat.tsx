@@ -44,7 +44,7 @@ export default function Chat() {
           }
         : {
             role: "bot",
-            text: "I don't have that in Akshay's resume. Try asking about his projects, Deloitte work, skills or certifications, or email him directly.",
+            text: "I don't have that on this site. Try asking about his projects, experience, skills or certifications, or email him directly.",
             mode: "search",
           };
     }
@@ -90,7 +90,7 @@ export default function Chat() {
                 </p>
                 {m.sources && m.sources.length > 0 && (
                   <p className="mt-1 font-mono text-[11px] text-ink/45">
-                    {m.mode === "ai" ? "AI answer" : "Matched from resume"}: {m.sources.slice(0, 2).join(", ")}
+                    {m.mode === "ai" ? "AI answer" : "Matched from this site"}: {m.sources.slice(0, 2).join(", ")}
                   </p>
                 )}
               </div>

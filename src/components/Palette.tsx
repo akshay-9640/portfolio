@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { nav, profile } from "../content";
+import { nav } from "../content";
 
 const actions = [
   ...nav.map((n) => ({ label: `Go to ${n.label}`, run: () => (location.hash = n.href) })),
-  { label: "Download Resume", run: () => window.open(profile.resume, "_blank") },
 ];
 
 // Cmd/Ctrl+K quick-jump menu.

@@ -33,7 +33,6 @@ export const profile = {
       text: "Ground-truth test sets, prompt regression tests and structured-output validation, so accuracy is measured before anything ships.",
     },
   ],
-  resume: "/resume.pdf",
 };
 
 export const nav = [

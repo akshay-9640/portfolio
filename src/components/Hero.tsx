@@ -41,13 +41,6 @@ export default function Hero() {
               View my work
             </a>
             <a
-              href={profile.resume}
-              download
-              className="rounded-full border border-ink/25 px-6 py-3 text-sm font-medium transition duration-100 hover:border-ink/60 active:scale-[0.97]"
-            >
-              Download Resume
-            </a>
-            <a
               href="#contact"
               className="rounded-full border border-ink/25 px-6 py-3 text-sm font-medium transition duration-100 hover:border-ink/60 active:scale-[0.97]"
             >

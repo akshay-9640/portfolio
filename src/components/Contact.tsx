@@ -51,9 +51,6 @@ export default function Contact() {
               <a href={contact.github} target="_blank" rel="noreferrer" className={btn}>
                 GitHub ↗
               </a>
-              <a href={profile.resume} download className={btn}>
-                Download Resume
-              </a>
             </div>
           </div>
 
