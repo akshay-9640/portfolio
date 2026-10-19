@@ -5,7 +5,7 @@ type Msg = { role: "user" | "bot"; text: string; sources?: string[]; mode?: "ai"
 
 const suggestions = [
   "What has he built with LangGraph?",
-  "How did he reach 95-98% accuracy?",
+  "How does he evaluate LLM output?",
   "What certifications does he have?",
 ];
 

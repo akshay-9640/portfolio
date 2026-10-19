@@ -22,6 +22,26 @@ function Links({ p }: { p: Project }) {
   );
 }
 
+// A screenshot of the live showcase when there is one; otherwise the system's flow, drawn as steps.
+function Preview({ p }: { p: Project }) {
+  if (p.image)
+    return (
+      <a href={p.live} target="_blank" rel="noreferrer" tabIndex={-1} aria-hidden className="block overflow-hidden border-b border-ink/10 bg-white">
+        <img src={p.image} alt="" loading="lazy" className="aspect-[16/10] w-full object-cover object-top transition-transform duration-500 ease-out hover:scale-[1.02]" />
+      </a>
+    );
+  return (
+    <ol className="flex aspect-[16/10] flex-col justify-center gap-1.5 border-b border-ink/10 bg-paper/60 px-5 py-4" aria-label="System flow">
+      {p.flow.map((f, k) => (
+        <li key={f} className="flex items-center gap-2.5 text-xs text-ink/75">
+          <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${k === p.flow.length - 1 ? "bg-ink" : "bg-ink/35"}`} />
+          <span className="truncate">{f}</span>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
 // The case study opens in a dialog so the grid keeps every card the same size.
 function CaseStudy({ p, onClose }: { p: Project | null; onClose: () => void }) {
   const ref = useRef<HTMLDialogElement>(null);
@@ -92,7 +112,7 @@ export default function Projects() {
 
   return (
     <Section id="projects" heading={headings.projects}>
-      {/* On wider screens each card spans five shared rows (status, title, description, tags, links)
+      {/* On wider screens each card spans six shared rows (status, preview, title, description, tags, links)
           through subgrid, so those parts line up across a row whatever their length. */}
       <div className="grid gap-6 md:grid-cols-6">
         {projects.map((p, i) => {
@@ -106,11 +126,12 @@ export default function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
-            className={`flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-card transition-colors hover:border-ink/25 ${span} md:row-span-5 md:grid md:grid-rows-subgrid md:gap-y-0`}
+            className={`flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-card transition-colors hover:border-ink/25 ${span} md:row-span-6 md:grid md:grid-rows-subgrid md:gap-y-0`}
           >
             <div className="flex items-center border-b border-ink/10 px-5 py-3">
               <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-ink/50">{p.status}</span>
             </div>
+            <Preview p={p} />
             <h3 className="px-5 pt-5 font-display text-xl font-bold leading-snug tracking-[-0.01em]">{p.title}</h3>
             <p className="px-5 pt-2 text-sm text-ink/70">{p.description}</p>
             <ul className="flex flex-wrap content-start gap-2 px-5 pt-4" aria-label="Technologies">

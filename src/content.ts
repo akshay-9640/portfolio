@@ -5,20 +5,20 @@ export type Heading = { before: string; accent: string };
 export const profile = {
   firstName: "AKSHAY",
   name: "Akshay Kumar Boddu",
-  headline: "Generative AI Engineer",
-  idTitle: "Generative AI Engineer | Agentic AI | RAG & LLM Evaluation",
+  headline: "AI Engineer",
+  idTitle: "AI Engineer | Agentic AI | RAG & LLM Evaluation",
   location: "Orlando, FL",
   tagline:
-    "I build production LLM agents for a top-10 U.S. commercial mortgage lender, from multi-agent workflows and RAG to evaluation and deployment.",
+    "I build AI agents businesses can trust: grounded in their documents, measured with evals, and taken from first prototype to production alongside the teams who use them.",
   heroStats: [
-    { value: "95-98%", label: "extraction accuracy" },
-    { value: "8h → 5m", label: "loan-doc review" },
-    { value: "15+", label: "agents orchestrated" },
+    { value: "4 yrs", label: "software engineering" },
+    { value: "6", label: "live AI demos" },
+    { value: "100%", label: "quotes verified in evals" },
   ],
-  bio: "Nearly 4 years in software engineering, including 2+ years building production LLM agent systems for a top-10 U.S. commercial mortgage lender. I design multi-agent workflows (LangGraph/LangChain, 15+ agents), RAG pipelines, LLM evaluation frameworks, and MCP-based tool integrations. My agents reach 95-98% extraction accuracy and cut loan-document review from about 8 hours to 5 minutes.",
+  bio: "Nearly 4 years in software engineering, including 2+ years building production LLM agent systems in financial services. I design multi-agent workflows (LangGraph/LangChain), RAG pipelines, LLM evaluation frameworks, human-in-the-loop review and MCP-based tool integrations. My open-source projects show the same approach in public: every AI answer traceable to its source and checked in code.",
   badgeTech: ["Python", "LangGraph", "FastAPI", "Azure"],
   photo: "/photos/akshay.jpg",
-  roles: ["Agentic AI", "LLM Applications", "RAG Pipelines", "LLM Evaluation", "MCP Integrations"],
+  roles: ["Agentic AI", "RAG", "LLM evaluation", "MCP"],
   pillars: [
     {
       title: "Agents that ship",
@@ -30,7 +30,7 @@ export const profile = {
     },
     {
       title: "Evals you can trust",
-      text: "Ground-truth test sets, prompt regression tests and structured-output validation, reaching 95-98% accuracy against a 90% target.",
+      text: "Ground-truth test sets, prompt regression tests and structured-output validation, so accuracy is measured before anything ships.",
     },
   ],
   resume: "/resume.pdf",
@@ -41,9 +41,7 @@ export const nav = [
   { label: "Stack", href: "#stack" },
   { label: "Projects", href: "#projects" },
   { label: "Process", href: "#process" },
-  { label: "Certifications", href: "#certifications" },
   { label: "Experience", href: "#experience" },
-  { label: "Achievements", href: "#achievements" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -81,7 +79,7 @@ export const stackLayers: { name: string; role: string; tools: Tool[] }[] = [
       { name: "LangGraph" },
       { name: "LangChain" },
       { name: "CrewAI" },
-      { name: "Human-in-the-loop", match: ["human-in-the-loop", "escalate", "escalation", "escalates", "Underwriter review", "Screenshot review"] },
+      { name: "Human-in-the-loop", match: ["human-in-the-loop", "escalate", "escalation", "escalates", "Screenshot review"] },
       { name: "Tool calling", match: ["tool-calling", "tool calling", "as tools"] },
     ],
   },
@@ -153,56 +151,10 @@ export const projects: {
   tags: string[];
   github?: string;
   live?: string;
+  image?: string;   // screenshot of the live showcase
   flow: string[];
   study: { problem: string; solution: string; result: string };
 }[] = [
-  {
-    title: "Service Action Request (SER) Agent",
-    status: "Deloitte | Production",
-    description:
-      "Sole-built LLM agent app that drafts underwriting briefs, replacing a 150-minute manual process.",
-    tags: ["LangGraph", "MCP", "FastAPI", "Azure"],
-    flow: ["Servicer request", "Agent drafts brief", "Underwriter review", "Decision", "Served to client apps over MCP"],
-    study: {
-      problem:
-        "Underwriters spent about 150 minutes per loan-servicer request (such as repair-escrow extensions) assembling a brief by hand.",
-      solution:
-        "An LLM agent workflow drafts the underwriting brief from the request. It is being packaged as an MCP server so the client's production apps can call the agents as tools; the first integration is into an existing production application.",
-      result:
-        "Projected 1,000 hours and $117K saved per year on repair-escrow extensions alone (40% efficiency gain for 15-20 underwriters; $290K total opportunity).",
-    },
-  },
-  {
-    title: "Multi-Document Reconciliation Agent",
-    status: "Deloitte | Production",
-    description:
-      "Reconciles ESA, PCA, appraisal and zoning reports (150-200 pages each) into one structured output.",
-    tags: ["LangChain", "RAG", "LLM Evals", "LangSmith"],
-    flow: ["4 reports (150-200 pp each)", "Extract + chunk", "Reconcile across docs", "Validate vs ground truth", "One structured output"],
-    study: {
-      problem:
-        "Reviewing environmental, property-condition, appraisal and zoning reports for one loan took about 8 hours.",
-      solution:
-        "An extraction-and-reconciliation agent in the team's 15+ agent LangGraph orchestration layer, with business-defined ground truth, prompt regression tests and LangSmith tracing.",
-      result:
-        "Per-loan review dropped from about 8 hours to 5 minutes at 95-98% extraction accuracy against a 90% target.",
-    },
-  },
-  {
-    title: "AI-Adoption Dashboard",
-    status: "Deloitte | Production",
-    description:
-      "Tracks GitHub Copilot and Amazon Q usage across 5 business units, with an LLM chatbot on top.",
-    tags: ["Python", "LLM Chatbot", "Dashboards"],
-    flow: ["Usage report upload", "Per-unit metrics", "Compare + flag inactive users", "LLM chatbot Q&A"],
-    study: {
-      problem:
-        "The client's VP had no single view of how AI coding tools were being adopted across business units.",
-      solution:
-        "Built as sole developer: leaders upload usage reports, compare units and flag inactive users, and an LLM chatbot answers questions about the data in natural language.",
-      result: "One place to see adoption across 5 business units without reading through charts.",
-    },
-  },
   {
     title: "Computer-Use Automation System",
     status: "Personal | Open source",
@@ -211,6 +163,7 @@ export const projects: {
     tags: ["Claude", "Playwright", "Flask", "Pydantic"],
     github: "https://github.com/akshay-9640/interface-ai-computeruse",
     live: "https://interface-ai-computeruse.vercel.app/",
+    image: "/projects/computer-use.jpg",
     flow: ["Claude discovers flow", "Capability artifact (typed, versioned)", "Replay with no LLM", "Escalate to human on risk"],
     study: {
       problem:
@@ -229,6 +182,7 @@ export const projects: {
     tags: ["MCP", "Claude", "Spring Boot", "Python", "SQLite"],
     github: "https://github.com/akshay-9640/microfinance-api",
     live: "https://microfinance-api-ai.vercel.app/",
+    image: "/projects/microfinance.jpg",
     flow: ["Question in plain English", "Claude picks an MCP tool", "Read-only call to the API", "Answer from tool results only"],
     study: {
       problem:
@@ -247,6 +201,7 @@ export const projects: {
     tags: ["Claude API", "MCP", "FastAPI", "Playwright", "Docker"],
     github: "https://github.com/akshay-9640/Personal-job-agent",
     live: "https://personal-job-agent-backend.vercel.app/",
+    image: "/projects/job-agent.jpg",
     flow: ["Add job posting", "Claude scores + tailors", "Playwright fills form (dry run)", "Screenshot review", "You submit"],
     study: {
       problem: "Manually submitting about 20 applications a day is slow, and most of the effort is re-typing the same answers.",
@@ -264,6 +219,7 @@ export const projects: {
     tags: ["Claude API", "MCP", "FastAPI", "Structured Outputs"],
     github: "https://github.com/akshay-9640/classwise",
     live: "https://classwise-kappa.vercel.app/",
+    image: "/projects/classwise.jpg",
     flow: ["Syllabus in", "Claude drafts exam + rubrics", "Code checks, teacher edits", "Students answer", "Rubric-clamped grading + review queue"],
     study: {
       problem:
@@ -282,6 +238,7 @@ export const projects: {
     tags: ["Claude API", "RAG", "MCP", "FastAPI", "Evals"],
     github: "https://github.com/akshay-9640/pathwise",
     live: "https://pathwise-bo18.vercel.app/",
+    image: "/projects/pathwise.jpg",
     flow: ["Student question", "Hybrid retrieval + rule checks", "Claude writes cited statements", "Code verifies every quote", "Answer with highlighted sources"],
     study: {
       problem:
@@ -292,21 +249,33 @@ export const projects: {
         "On a 36-question eval, hybrid retrieval found 99% of expected sources in the top 6 and beat a cross-encoder reranker, and 100% of quotes in Claude's answers were verified. The evals also caught answers whose quotes were real but whose claims were not, which led to code-computed course lists.",
     },
   },
+  {
+    title: "Underwise",
+    status: "Personal | Open source",
+    description:
+      "Reviews commercial property insurance submissions before an underwriter opens them: every extracted value carries a quote verified in code, and five checks run in code, not in the model.",
+    tags: ["Claude", "FastAPI", "Document AI", "Evals"],
+    github: "https://github.com/akshay-9640/underwise",
+    live: "https://underwise-blond.vercel.app/",
+    image: "/projects/underwise.jpg",
+    flow: ["Broker email, PDFs, CSV", "Claude extracts each value with a quote", "Code verifies quotes, flags conflicts", "Five checks in code", "Summary + draft follow-up email"],
+    study: {
+      problem:
+        "Underwriters lose time on submissions that are missing information or contradict themselves, and an AI extractor is risky if it can quietly invent or pick a value.",
+      solution:
+        "Claude reads each document separately and returns values exactly as written, each with a verbatim quote. Code checks every quote is on the stated page, normalizes values, and keeps both sides of a disagreement instead of choosing one. Five rules (location count vs schedule, TIV referral threshold, sprinklers, loss history) run in plain code. Reviewers can correct a field and rerun the checks, and an Ask panel answers questions with verified citations.",
+      result:
+        "Across 3 live runs of 4 fictional packets: 258/258 field checks, 60/60 rule results and 195/195 quotes found on their stated page, with 117 offline tests. A planted instruction in a broker email had no effect.",
+    },
+  },
 ];
 
 export const workflow = [
-  { step: "Discover", text: "I spend about half my time with product managers and underwriters, deciding which decisions AI automates and which stay human-reviewed." },
+  { step: "Discover", text: "I spend about half my time with product managers and business teams, deciding which decisions AI automates and which stay human-reviewed." },
   { step: "Prototype", text: "A working agent on real documents early, so feedback is about behavior, not slides." },
   { step: "Evaluate", text: "Business-defined ground truth (10-50 labeled documents per agent), prompt regression tests and structured-output validation before anything ships." },
   { step: "Demo & UAT", text: "Live demos with the people who'll use it; their feedback goes in before production." },
   { step: "Ship & document", text: "FastAPI + Docker behind Entra ID/OAuth2, CI/CD, plus architecture docs and production-readiness notes." },
-];
-
-export const impact = [
-  { label: "Underwriting brief (SER)", before: "150 min", after: "agent draft" },
-  { label: "Multi-report loan review", before: "8 hrs", after: "5 min" },
-  { label: "Form 1005 processing", before: "15-20 min", after: "2 min" },
-  { label: "Form 1006 processing", before: "4-8 hrs", after: "3-5 min" },
 ];
 
 export const certifications: { name: string; issuer: string }[] = [
@@ -327,15 +296,12 @@ export const timeline: {
     org: "Deloitte, Lake Mary, FL",
     when: "Jul 2024 - Present",
     bullets: [
-      "Sole developer of the Service Action Request (SER) agent app for a top-10 U.S. commercial mortgage lender, replacing a 150-minute manual process (projected 1,000 hours and $117K saved per year). Packaging it as an MCP server for the client's production applications.",
-      "Built a multi-document reconciliation agent for ESA, PCA, appraisal and zoning reports (150-200 pages each), cutting per-loan review from about 8 hours to 5 minutes.",
-      "Delivered extraction agents for loan forms 1005 and 1006 with human-in-the-loop review for unstructured sections: 1005 from 15-20 min to about 2 min, 1006 from 4-8 hrs to 3-5 min.",
-      "Built LLM evaluation frameworks (10-50 human-labeled documents per agent, prompt regression testing, structured-output validation), reaching 95-98% accuracy against a 90% target.",
-      "Integrated the agents into a 15+ agent LangGraph/LangChain layer (4-person team) and used LangSmith tracing to debug and tune multi-agent runs.",
-      "Designed RAG architectures with Azure AI Search, FAISS, Chroma, semantic chunking and hybrid search; benchmarked GPT-4o, Claude, Llama and Groq per task on accuracy, latency and cost.",
-      "Built FastAPI services in Docker secured with Entra ID, OAuth2 and JWT; built AWS (S3, Lambda, Glue, Redshift) and Azure (ADF, Synapse) data pipelines; automated delivery with GitHub Actions, GitLab CI, Azure DevOps and Jenkins.",
-      "Sole developer of an AI-adoption dashboard (GitHub Copilot and Amazon Q usage across 5 business units) with an LLM chatbot for natural-language queries.",
-      "Spent about half of my time in discovery with product managers and business teams, led live demos and UAT with underwriters, and wrote architecture documentation and production-readiness recommendations.",
+      "Build production LLM agent workflows for document extraction and drafting in financial services, taking them from POC through evaluation and UAT to deployment.",
+      "Design LLM evaluation frameworks: human-labeled ground truth, prompt regression tests and structured-output validation.",
+      "Work within a multi-agent LangGraph/LangChain orchestration layer with human-in-the-loop review, LangSmith tracing and MCP-based tool integrations.",
+      "Design RAG architectures (vector search, semantic chunking, hybrid search) and compare models per task on accuracy, latency and cost.",
+      "Build FastAPI services in Docker behind Entra ID, OAuth2 and JWT, cloud data pipelines on AWS and Azure, and CI/CD with GitHub Actions, GitLab CI and Azure DevOps.",
+      "Spend much of my time in discovery and live demos with product and business teams, and write architecture and production-readiness documentation.",
     ],
   },
   {
@@ -379,12 +345,12 @@ export const gallery = [
 ];
 
 export const achievements = [
-  { value: "95-98%", label: "extraction accuracy vs. 90% target" },
-  { value: "8h → 5m", label: "loan-document review time" },
-  { value: "$117K", label: "projected annual savings from SER" },
-  { value: "15+", label: "agents in the orchestration layer" },
   { value: "4", label: "years in software engineering" },
-];
+  { value: "6", label: "open-source AI projects with live demos" },
+  { value: "4", label: "Microsoft and AWS certifications" },
+  { value: "100%", label: "of quotes verified in the Pathwise and Underwise evals" },
+  { value: "M.S.", label: "Computer and Information Sciences, FIU" },
+]
 
 export const contact = {
   email: "akshaykumarboddu019@gmail.com",

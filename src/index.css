@@ -15,6 +15,14 @@ body {
   @apply bg-paper font-sans text-ink antialiased;
 }
 
+/* When the 3D map is running it draws the photo itself; the card stays as the no-WebGL fallback. */
+.hero-photo-card {
+  transition: opacity 600ms ease;
+}
+[data-universe="on"] .hero-photo-card {
+  opacity: 0;
+}
+
 @layer utilities {
   .perspective {
     perspective: 1200px;

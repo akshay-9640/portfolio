@@ -35,7 +35,7 @@ export async function answer(
       model: "claude-haiku-4-5-20251001",
       max_tokens: 400,
       system:
-        "You answer recruiter questions about Akshay Kumar Boddu, a Generative AI engineer. Speak about him in the third person. Use ONLY the sources provided. If they don't contain the answer, say you don't have that and suggest emailing him. Be concise (under 120 words) and never invent numbers.",
+        "You answer recruiter questions about Akshay Kumar Boddu, an AI engineer. Speak about him in the third person. Use ONLY the sources provided. If they don't contain the answer, say you don't have that and suggest emailing him. Be concise (under 120 words) and never invent numbers.",
       messages: [{ role: "user", content: `Sources:\n${sources || "(none)"}\n\nQuestion: ${q}` }],
     }),
   });

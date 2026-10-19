@@ -1,33 +1,5 @@
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { profile } from "../content";
-
-// Types out each role, pauses, deletes, moves to the next.
-function useTyped(words: string[]) {
-  const [i, setI] = useState(0);
-  const [n, setN] = useState(0);
-  const [deleting, setDeleting] = useState(false);
-
-  useEffect(() => {
-    const word = words[i];
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
-    let delay = deleting ? 35 : 70;
-    if (!deleting && n === word.length) delay = 1400;
-    const t = setTimeout(() => {
-      if (!deleting && n === word.length) setDeleting(true);
-      else if (deleting && n === 0) {
-        setDeleting(false);
-        setI((i + 1) % words.length);
-      } else setN(n + (deleting ? -1 : 1));
-    }, delay);
-    return () => clearTimeout(t);
-  }, [n, deleting, i, words]);
-
-  const reduce =
-    typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  return reduce ? words[0] : words[i].slice(0, n);
-}
 
 const fade = (delay: number) => ({
   initial: { opacity: 0, y: 24 },
@@ -36,8 +8,6 @@ const fade = (delay: number) => ({
 });
 
 export default function Hero() {
-  const typed = useTyped(profile.roles);
-
   return (
     <section
       id="top"
@@ -49,8 +19,7 @@ export default function Hero() {
             {...fade(0.1)}
             className="font-mono text-xs uppercase tracking-[0.12em] text-ink/60"
           >
-            {typed}
-            <span aria-hidden className="ml-0.5 text-ink/40">|</span>
+            {profile.roles.join(" · ")}
           </motion.p>
 
           <motion.h1
@@ -107,8 +76,10 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto w-full max-w-xs md:max-w-sm"
+          data-universe-anchor
+          className="relative mx-auto w-full max-w-xs cursor-grab touch-pan-y select-none active:cursor-grabbing md:max-w-sm"
         >
+          <div className="hero-photo-card relative">
           <img
             src={profile.photo}
             alt={`Portrait of ${profile.name}`}
@@ -116,6 +87,7 @@ export default function Hero() {
           />
           <div className="absolute bottom-4 left-4 rounded-full bg-paper/60 px-3.5 py-1.5 text-xs font-medium text-ink backdrop-blur-xl backdrop-saturate-150">
             {profile.location}
+          </div>
           </div>
         </motion.div>
       </div>
