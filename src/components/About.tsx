@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { headings, profile } from "../content";
+import HangingBadge from "./HangingBadge";
 import Reveal from "./Reveal";
 import Section from "./Section";
 
@@ -14,7 +15,8 @@ export default function About() {
 
   return (
     <Section id="about" heading={headings.about}>
-      <div className="flex flex-col items-center gap-6">
+      <div className="grid items-start gap-10 md:grid-cols-[auto_1fr] md:gap-24">
+        <HangingBadge className="mx-auto">
         <button
           type="button"
           onPointerEnter={(e) => e.pointerType === "mouse" && setHovered(true)}
@@ -73,7 +75,22 @@ export default function About() {
             </div>
           </motion.div>
         </button>
-        <ul className="mt-6 grid w-full gap-4 md:grid-cols-3">
+        </HangingBadge>
+
+        <div className="self-center md:pt-24">
+        <dl className="grid gap-x-10 gap-y-6 sm:grid-cols-2">
+          {profile.facts.map((f) => (
+            <Reveal key={f.label}>
+              <dt className="text-xs font-medium uppercase tracking-[0.1em] text-ink/45">{f.label}</dt>
+              <dd className="mt-1.5 font-display text-xl font-bold tracking-[-0.01em]">{f.value}</dd>
+            </Reveal>
+          ))}
+        </dl>
+        <Reveal>
+          <p className="mt-8 max-w-xl text-ink/70">{profile.bio}</p>
+        </Reveal>
+        </div>
+        <ul className="grid w-full gap-4 md:col-span-2 md:grid-cols-3">
           {profile.pillars.map((p, i) => (
             <Reveal key={p.title} delay={i * 0.1}>
               <li className="h-full rounded-2xl border border-ink/10 bg-card p-6">

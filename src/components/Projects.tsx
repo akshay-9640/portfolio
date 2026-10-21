@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { headings, projects } from "../content";
 import Section from "./Section";
 
@@ -107,8 +107,83 @@ function CaseStudy({ p, onClose }: { p: Project | null; onClose: () => void }) {
   );
 }
 
+// Soft tints of the dark card color, one per project, so the deck reads as separate sheets.
+const TINTS = ["#16203a", "#1f1a2f", "#162a26", "#2a2219", "#182433", "#27192a", "#1d2618"];
+
+// One card of the deck: it slides in from the right over the cards before it, which then
+// step back (slightly smaller and dimmer), as the page scrolls.
+function DeckCard({ p, i, n, progress, onOpen }: { p: Project; i: number; n: number; progress: MotionValue<number>; onOpen: () => void }) {
+  const slot = 1 / n;
+  const x = useTransform(progress, [Math.max(0, (i - 1) * slot + slot * 0.4), i * slot + slot * 0.4], i === 0 ? ["0%", "0%"] : ["115%", "0%"]);
+  const scale = useTransform(progress, [i * slot + slot * 0.4, (i + 1) * slot + slot * 0.4], [1, i === n - 1 ? 1 : 0.94]);
+  const dim = useTransform(progress, [i * slot + slot * 0.4, (i + 1) * slot + slot * 0.4], [1, i === n - 1 ? 1 : 0.45]);
+  return (
+    <motion.article
+      style={{ x, scale, opacity: dim, top: i * 10, left: i * 14, background: TINTS[i % TINTS.length], zIndex: i }}
+      className="absolute grid h-[min(64vh,560px)] w-[min(980px,calc(100%-6rem))] origin-left grid-cols-[1fr_1.1fr] gap-8 overflow-hidden rounded-[28px] border border-ink/10 p-8 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.8)]"
+    >
+      <div className="flex min-w-0 flex-col">
+        <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-ink/50">{String(i + 1).padStart(2, "0")} · {p.status}</span>
+        <h3 className="mt-4 font-display text-4xl font-bold leading-[1.05] tracking-[-0.025em]">{p.title}</h3>
+        <p className="mt-4 text-ink/70">{p.description}</p>
+        <ul className="mt-5 flex flex-wrap gap-2" aria-label="Technologies">
+          {p.tags.map((t) => <li key={t} className="rounded-full border border-ink/15 px-2.5 py-0.5 text-[11px] text-ink/70">{t}</li>)}
+        </ul>
+        <div className="mt-auto flex flex-wrap items-center gap-5 pt-6 text-sm font-medium">
+          <button type="button" aria-haspopup="dialog" onClick={onOpen}
+            className="flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 font-semibold text-paper transition duration-100 hover:bg-white active:scale-[0.97]">
+            Case study <span aria-hidden>→</span>
+          </button>
+          <Links p={p} />
+        </div>
+      </div>
+      <div className="min-w-0 self-center overflow-hidden rounded-2xl ring-1 ring-ink/10">
+        <Preview p={p} />
+      </div>
+    </motion.article>
+  );
+}
+
+function Deck({ onOpen }: { onOpen: (i: number) => void }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+  return (
+    // Tall wrapper: scrolling through it drives the deck while the cards stay pinned on screen.
+    <div ref={ref} style={{ height: `${projects.length * 55 + 45}vh` }}>
+      <div className="sticky top-16 flex h-[calc(100vh-4rem)] items-center">
+        <div className="relative h-[min(64vh,560px)] w-full">
+          {projects.map((p, i) => (
+            <DeckCard key={p.title} p={p} i={i} n={projects.length} progress={scrollYProgress} onOpen={() => onOpen(i)} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function useWide() {
+  const [wide, setWide] = useState(() => typeof window !== "undefined" && window.matchMedia("(min-width: 1024px)").matches);
+  useEffect(() => {
+    const m = window.matchMedia("(min-width: 1024px)");
+    const on = () => setWide(m.matches);
+    m.addEventListener("change", on);
+    return () => m.removeEventListener("change", on);
+  }, []);
+  return wide;
+}
+
 export default function Projects() {
   const [open, setOpen] = useState<number | null>(null);
+  const wide = useWide();
+  const reduce = useReducedMotion();
+
+  if (wide && !reduce)
+    return (
+      <Section id="projects" heading={headings.projects}>
+        <Deck onOpen={setOpen} />
+        <CaseStudy p={open === null ? null : projects[open]} onClose={() => setOpen(null)} />
+      </Section>
+    );
 
   return (
     <Section id="projects" heading={headings.projects}>

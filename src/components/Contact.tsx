@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { contact, headings, profile } from "../content";
+import HangingBadge from "./HangingBadge";
 import Section from "./Section";
 
 const btn =
@@ -52,6 +53,23 @@ export default function Contact() {
                 GitHub ↗
               </a>
             </div>
+            <HangingBadge strap={72} className="mx-auto mt-14 w-fit md:mx-0 md:ml-10">
+              <div className="w-[272px] rounded-[22px] border border-ink/15 bg-card p-5 shadow-[0_24px_48px_-24px_rgba(0,0,0,0.8)]">
+                <div className="flex items-center gap-3">
+                  <img src={profile.photo} alt="" className="h-12 w-12 rounded-full object-cover object-top ring-1 ring-ink/15" />
+                  <div>
+                    <p className="font-display text-lg font-bold leading-tight">{profile.name}</p>
+                    <p className="font-serif text-base italic text-ink/60">{profile.headline}</p>
+                  </div>
+                </div>
+                <ul className="mt-4 space-y-2 border-t border-ink/10 pt-4 text-sm">
+                  <li><a href={`mailto:${contact.email}`} className="text-ink/80 hover:text-ink">{contact.email}</a></li>
+                  <li><a href={contact.github} target="_blank" rel="noreferrer" className="text-ink/80 hover:text-ink">{contact.github.replace("https://", "")}</a></li>
+                  <li><a href={contact.linkedin} target="_blank" rel="noreferrer" className="text-ink/80 hover:text-ink">{contact.linkedin.replace("https://www.", "")}</a></li>
+                </ul>
+                <p className="mt-4 text-xs text-ink/45">{contact.location} · drag me</p>
+              </div>
+            </HangingBadge>
           </div>
 
           <form onSubmit={send} className="space-y-3">

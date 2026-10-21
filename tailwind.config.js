@@ -7,6 +7,7 @@ export default {
       fontFamily: {
         display: ['"Space Grotesk"', "Inter", "sans-serif"],
         mono: ['"JetBrains Mono"', "ui-monospace", "monospace"],
+        serif: ['"Instrument Serif"', "Georgia", "serif"],
         sans: ["Inter", "system-ui", "sans-serif"],
       },
     },

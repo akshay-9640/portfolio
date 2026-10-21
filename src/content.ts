@@ -17,6 +17,13 @@ export const profile = {
   ],
   bio: "Nearly 4 years in software engineering, including 2+ years building production LLM agent systems in financial services. I design multi-agent workflows (LangGraph/LangChain), RAG pipelines, LLM evaluation frameworks, human-in-the-loop review and MCP-based tool integrations. My open-source projects show the same approach in public: every AI answer traceable to its source and checked in code.",
   badgeTech: ["Python", "LangGraph", "FastAPI", "Azure"],
+  // The list beside the hanging badge in About.
+  facts: [
+    { label: "Name", value: "Akshay Kumar Boddu" },
+    { label: "Location", value: "Orlando, FL" },
+    { label: "Focus", value: "Agentic AI · RAG · LLM evaluation" },
+    { label: "Role", value: "AI Engineer" },
+  ],
   photo: "/photos/akshay.jpg",
   roles: ["Agentic AI", "RAG", "LLM evaluation", "MCP"],
   pillars: [
@@ -270,11 +277,11 @@ export const projects: {
 ];
 
 export const workflow = [
-  { step: "Discover", text: "I spend about half my time with product managers and business teams, deciding which decisions AI automates and which stay human-reviewed." },
-  { step: "Prototype", text: "A working agent on real documents early, so feedback is about behavior, not slides." },
-  { step: "Evaluate", text: "Business-defined ground truth (10-50 labeled documents per agent), prompt regression tests and structured-output validation before anything ships." },
-  { step: "Demo & UAT", text: "Live demos with the people who'll use it; their feedback goes in before production." },
-  { step: "Ship & document", text: "FastAPI + Docker behind Entra ID/OAuth2, CI/CD, plus architecture docs and production-readiness notes." },
+  { step: "Discover", accent: "with the team", text: "I spend about half my time with product managers and business teams, deciding which decisions AI automates and which stay human-reviewed." },
+  { step: "Prototype", accent: "on real data", text: "A working agent on real documents early, so feedback is about behavior, not slides." },
+  { step: "Evaluate", accent: "before shipping", text: "Business-defined ground truth (10-50 labeled documents per agent), prompt regression tests and structured-output validation before anything ships." },
+  { step: "Demo & UAT", accent: "with the users", text: "Live demos with the people who'll use it; their feedback goes in before production." },
+  { step: "Ship & document", accent: "to last", text: "FastAPI + Docker behind Entra ID/OAuth2, CI/CD, plus architecture docs and production-readiness notes." },
 ];
 
 export const certifications: { name: string; issuer: string }[] = [
