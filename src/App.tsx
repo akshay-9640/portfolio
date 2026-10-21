@@ -10,10 +10,12 @@ import Certifications from "./components/Certifications";
 import Experience from "./components/Experience";
 import Achievements from "./components/Achievements";
 import Contact from "./components/Contact";
+import Intro from "./components/Intro";
 
 export default function App() {
   return (
     <>
+      <Intro />
       <Nav />
       <Palette />
       <Chat />

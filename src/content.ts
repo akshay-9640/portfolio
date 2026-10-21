@@ -42,6 +42,14 @@ export const profile = {
   ],
 };
 
+// The animated intro shown on a visitor's first visit (spoken with the browser's voice).
+export const intro = {
+  greeting: "Hi, I'm Akshay.",
+  script:
+    "Hi, I'm Akshay Kumar, an AI engineer based in Orlando. I build AI agents that businesses can trust: grounded in their own documents, measured with evals, and taken from first prototype to production. Everything here is real and running. Click my photo on the map to explore my projects, or just say hello.",
+  frames: { idle: "/intro/idle.webp", talk: "/intro/talk.webp", blink: "/intro/blink.webp" },
+};
+
 export const nav = [
   { label: "About", href: "#about" },
   { label: "Stack", href: "#stack" },

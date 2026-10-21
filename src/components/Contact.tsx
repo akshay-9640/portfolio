@@ -84,6 +84,10 @@ export default function Contact() {
       </Section>
       <footer className="border-t border-ink/10 px-5 py-8 text-center text-xs text-ink/50">
         © {new Date().getFullYear()} {profile.name}
+        <span aria-hidden className="mx-2">·</span>
+        <button type="button" onClick={() => window.dispatchEvent(new Event("intro:open"))} className="underline-offset-4 hover:text-ink hover:underline">
+          Replay intro
+        </button>
       </footer>
     </>
   );
