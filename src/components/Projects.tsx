@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion, useScroll } from "framer-motion";
 import { headings, projects } from "../content";
 import Section from "./Section";
 
@@ -27,7 +26,7 @@ function Preview({ p }: { p: Project }) {
   if (p.image)
     return (
       <a href={p.live} target="_blank" rel="noreferrer" tabIndex={-1} aria-hidden className="block overflow-hidden border-b border-ink/10 bg-white">
-        <img src={p.image} alt="" loading="lazy" className="aspect-[16/10] w-full object-cover object-top transition-transform duration-500 ease-out hover:scale-[1.02]" />
+        <img src={p.image} alt="" loading="lazy" className="aspect-[16/10] w-full object-cover object-top transition-transform duration-500 ease-out " />
       </a>
     );
   return (
@@ -107,115 +106,50 @@ function CaseStudy({ p, onClose }: { p: Project | null; onClose: () => void }) {
   );
 }
 
-// Soft tints of the dark card color, one per project, so the cards read as separate sheets.
-const TINTS = ["#16203a", "#1f1a2f", "#162a26", "#2a2219", "#182433", "#27192a", "#1d2618"];
-
-// One stop on the path: the card swings gently into place when it reaches the screen.
-function PathCard({ p, i, onOpen, cardRef }: { p: Project; i: number; onOpen: () => void; cardRef: (el: HTMLElement | null) => void }) {
-  const reduce = useReducedMotion();
-  const left = i % 2 === 0;
-  return (
-    <motion.article
-      ref={cardRef}
-      initial={reduce ? { opacity: 0 } : { opacity: 0, y: 60, rotate: left ? -5 : 5 }}
-      whileInView={{ opacity: 1, y: 0, rotate: reduce ? 0 : left ? -1 : 1 }}
-      viewport={{ once: true, margin: "-15% 0px" }}
-      transition={{ type: "spring", bounce: 0.2, duration: 0.9 }}
-      style={{ background: TINTS[i % TINTS.length] }}
-      className={`relative z-10 w-full overflow-hidden rounded-[24px] border border-ink/10 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.85)] md:grid md:w-[72%] md:grid-cols-[1fr_1.05fr] ${left ? "md:mr-auto" : "md:ml-auto"}`}
-    >
-      <div className="self-stretch overflow-hidden md:[&>*]:h-full md:[&>*]:border-b-0 md:[&_img]:h-full md:[&_img]:aspect-auto">
-        <Preview p={p} />
-      </div>
-      <div className="flex flex-col p-6">
-        <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-ink/50">{String(i + 1).padStart(2, "0")} · {p.status}</span>
-        <h3 className="mt-2 font-display text-2xl font-bold leading-tight tracking-[-0.02em] sm:text-3xl">{p.title}</h3>
-        <p className="mt-3 text-sm text-ink/70">{p.description}</p>
-        <ul className="mt-4 flex flex-wrap gap-2" aria-label="Technologies">
-          {p.tags.map((t) => <li key={t} className="rounded-full border border-ink/15 px-2.5 py-0.5 text-[11px] text-ink/70">{t}</li>)}
-        </ul>
-        <div className="mt-auto flex flex-wrap items-center gap-5 pt-6 text-sm font-medium">
-          <button type="button" aria-haspopup="dialog" onClick={onOpen}
-            className="flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 font-semibold text-paper transition duration-100 hover:bg-white active:scale-[0.97]">
-            Case study <span aria-hidden>→</span>
-          </button>
-          <Links p={p} />
-        </div>
-      </div>
-    </motion.article>
-  );
-}
-
-// The dashed path that winds from card to card. It is drawn up to where the reader has
-// scrolled (a mask whose length follows the scroll), with a small dot at its tip. The page
-// itself scrolls normally: nothing is pinned and nothing moves sideways against the scroll.
-function TravelPath({ box, cards }: { box: React.RefObject<HTMLDivElement>; cards: React.MutableRefObject<(HTMLElement | null)[]> }) {
-  const [d, setD] = useState("");
-  const [size, setSize] = useState({ w: 0, h: 0 });
-  const line = useRef<SVGPathElement>(null);
-  const dot = useRef<SVGCircleElement>(null);
-  const { scrollYProgress } = useScroll({ target: box, offset: ["start 70%", "end 70%"] });
-
-  useEffect(() => {
-    const el = box.current;
-    if (!el) return;
-    const build = () => {
-      const b = el.getBoundingClientRect();
-      // Each stop is the card's inner edge (the side facing the middle), vertically centered.
-      const pts = cards.current.filter(Boolean).map((c, i) => {
-        const r = c!.getBoundingClientRect();
-        return { x: (i % 2 === 0 ? r.right - 40 : r.left + 40) - b.left, y: r.top + r.height / 2 - b.top };
-      });
-      if (pts.length < 2) return;
-      let path = `M ${pts[0].x} ${pts[0].y}`;
-      for (let i = 1; i < pts.length; i++) {
-        const a = pts[i - 1], c = pts[i], my = (a.y + c.y) / 2;
-        path += ` C ${a.x} ${my}, ${c.x} ${my}, ${c.x} ${c.y}`;   // an S-curve between stops
-      }
-      setD(path);
-      setSize({ w: b.width, h: b.height });
-    };
-    const ro = new ResizeObserver(build);
-    ro.observe(el);
-    build();
-    return () => ro.disconnect();
-  }, [box, cards]);
-
-  useEffect(() => scrollYProgress.on("change", (v) => {
-    const l = line.current, c = dot.current;
-    if (!l || !c) return;
-    const pt = l.getPointAtLength(l.getTotalLength() * Math.min(1, Math.max(0, v)));
-    c.setAttribute("cx", String(pt.x));
-    c.setAttribute("cy", String(pt.y));
-  }), [scrollYProgress, d]);
-
-  if (!d) return null;
-  return (
-    <svg aria-hidden className="pointer-events-none absolute inset-0 hidden md:block" width={size.w} height={size.h}>
-      <defs>
-        <mask id="path-reveal" maskUnits="userSpaceOnUse">
-          <motion.path d={d} fill="none" stroke="white" strokeWidth={6} style={{ pathLength: scrollYProgress }} />
-        </mask>
-      </defs>
-      <path d={d} fill="none" className="stroke-ink/[0.07]" strokeWidth={2} strokeDasharray="6 10" />
-      <path ref={line} d={d} fill="none" className="stroke-ink/45" strokeWidth={2} strokeDasharray="6 10" mask="url(#path-reveal)" />
-      <circle ref={dot} r={6} className="fill-ink" />
-    </svg>
-  );
-}
-
 export default function Projects() {
   const [open, setOpen] = useState<number | null>(null);
-  const box = useRef<HTMLDivElement>(null);
-  const cards = useRef<(HTMLElement | null)[]>([]);
 
   return (
     <Section id="projects" heading={headings.projects}>
-      <div ref={box} className="relative flex flex-col gap-10 md:gap-40">
-        <TravelPath box={box} cards={cards} />
-        {projects.map((p, i) => (
-          <PathCard key={p.title} p={p} i={i} onOpen={() => setOpen(i)} cardRef={(el) => { cards.current[i] = el; }} />
-        ))}
+      {/* On wider screens each card spans six shared rows (status, preview, title, description, tags, links)
+          through subgrid, so those parts line up across a row whatever their length. */}
+      <div className="grid gap-6 md:grid-cols-6">
+        {projects.map((p, i) => {
+          // Fill the last row: two leftover cards split it, a single one sits in the middle.
+          const left = projects.length % 3, inLastRow = i >= projects.length - left;
+          const span = inLastRow && left === 2 ? "md:col-span-3" : inLastRow && left === 1 ? "md:col-span-2 md:col-start-3" : "md:col-span-2";
+          return (
+          <article
+            key={p.title}
+            className={`flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-card transition-colors hover:border-ink/25 ${span} md:row-span-6 md:grid md:grid-rows-subgrid md:gap-y-0`}
+          >
+            <div className="flex items-center border-b border-ink/10 px-5 py-3">
+              <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-ink/50">{p.status}</span>
+            </div>
+            <Preview p={p} />
+            <h3 className="px-5 pt-5 font-display text-xl font-bold leading-snug tracking-[-0.01em]">{p.title}</h3>
+            <p className="px-5 pt-2 text-sm text-ink/70">{p.description}</p>
+            <ul className="flex flex-wrap content-start gap-2 px-5 pt-4" aria-label="Technologies">
+              {p.tags.map((t) => (
+                <li key={t} className="rounded-full border border-ink/15 px-2.5 py-0.5 text-[11px] text-ink/70">
+                  {t}
+                </li>
+              ))}
+            </ul>
+            <div className="flex items-end gap-5 px-5 pb-5 pt-6 text-sm font-medium">
+              <button
+                type="button"
+                aria-haspopup="dialog"
+                onClick={() => setOpen(i)}
+                className="text-ink underline-offset-4 hover:underline"
+              >
+                Case study →
+              </button>
+              <Links p={p} />
+            </div>
+          </article>
+          );
+        })}
       </div>
       <CaseStudy p={open === null ? null : projects[open]} onClose={() => setOpen(null)} />
     </Section>

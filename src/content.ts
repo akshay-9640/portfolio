@@ -59,7 +59,7 @@ export const nav = [
 ];
 
 export const headings: Record<string, Heading> = {
-  about: { before: "Hi, I'm", accent: "Akshay Kumar." },
+  about: { before: "Hi, I'm", accent: "Akshay." },
   stack: { before: "The stack behind", accent: "my systems." },
   projects: { before: "Things I've", accent: "built." },
   process: { before: "How I", accent: "work." },

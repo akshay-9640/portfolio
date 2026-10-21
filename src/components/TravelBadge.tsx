@@ -124,7 +124,8 @@ export default function TravelBadge() {
   return (
     <div aria-hidden={!shown} className={`pointer-events-none fixed left-0 top-0 z-40 ${shown ? "" : "invisible"}`}>
       <div ref={rig} className="flex flex-col items-center will-change-transform" style={{ width: CARD_W, transformOrigin: "50% 0" }}>
-        <div aria-hidden className="w-[3px] flex-1 bg-gradient-to-b from-ink/0 via-ink/20 to-ink/40" />
+        {/* Only the last stretch of the lanyard shows, so a long drop never draws a line through headings. */}
+        <div aria-hidden className="w-[3px] flex-1 bg-ink/40 [mask-image:linear-gradient(to_bottom,transparent_calc(100%-110px),black)]" />
         <div aria-hidden className="-mt-0.5 h-3.5 w-7 rounded-[5px] border-2 border-ink/40" />
         <div ref={card} className="pointer-events-auto -mt-1 cursor-grab touch-pan-y select-none active:cursor-grabbing" style={{ perspective: 1000 }}>
           <button
