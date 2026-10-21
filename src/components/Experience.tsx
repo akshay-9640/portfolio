@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { education, gallery, headings, timeline } from "../content";
+import { certifications, education, gallery, headings, timeline } from "../content";
 import Reveal from "./Reveal";
 import Section from "./Section";
 
@@ -59,6 +59,15 @@ export default function Experience() {
                 <h3 className="font-display text-xl font-bold tracking-[-0.01em]">{e.degree}</h3>
                 <p className="mt-1 text-sm text-ink/70">{e.school}</p>
                 <p className="mt-1 font-mono text-xs text-ink/50">{e.when}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-10 text-xs font-medium uppercase tracking-[0.12em] text-ink/50">Certifications</p>
+          <ul className="mt-4 divide-y divide-ink/10 border-y border-ink/10">
+            {certifications.map((c) => (
+              <li key={c.name} className="flex items-center justify-between gap-4 py-3 text-sm">
+                <span>{c.name}</span>
+                <span className="shrink-0 font-mono text-[11px] uppercase tracking-wider text-ink/50">{c.issuer}</span>
               </li>
             ))}
           </ul>

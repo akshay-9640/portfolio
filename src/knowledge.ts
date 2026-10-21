@@ -1,6 +1,6 @@
 // Grounding for the "Ask Akshay" chat. Built only from content.ts so the answers
 // can never drift from what the site says.
-import { achievements, certifications, contact, education, profile, projects, stackLayers, timeline } from "./content";
+import { certifications, contact, education, profile, projects, stackLayers, timeline } from "./content";
 
 export type Chunk = { id: string; title: string; text: string };
 
@@ -17,7 +17,7 @@ export const chunks: Chunk[] = [
   ...stackLayers.map((l) => ({ id: `stack-${l.name}`, title: `Skills: ${l.name}`, text: `${l.role} ${l.tools.map((t) => t.name).join(", ")}.` })),
   { id: "certs", title: "Certifications", text: certifications.map((c) => `${c.issuer} ${c.name}`).join("; ") },
   { id: "edu", title: "Education", text: education.map((e) => `${e.degree}, ${e.school}, ${e.when}`).join("; ") },
-  { id: "highlights", title: "Highlights", text: achievements.map((a) => `${a.value} ${a.label}`).join("; ") },
+  { id: "highlights", title: "Highlights", text: profile.heroStats.map((a) => `${a.value} ${a.label}`).join("; ") },
   { id: "contact", title: "Contact", text: `Email ${contact.email}. LinkedIn ${contact.linkedin}. GitHub ${contact.github}. Location ${contact.location}.` },
 ];
 

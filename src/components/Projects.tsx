@@ -116,10 +116,11 @@ function DeckCard({ p, i, n, progress, onOpen }: { p: Project; i: number; n: num
   const slot = 1 / n;
   const x = useTransform(progress, [Math.max(0, (i - 1) * slot + slot * 0.4), i * slot + slot * 0.4], i === 0 ? ["0%", "0%"] : ["115%", "0%"]);
   const scale = useTransform(progress, [i * slot + slot * 0.4, (i + 1) * slot + slot * 0.4], [1, i === n - 1 ? 1 : 0.94]);
-  const dim = useTransform(progress, [i * slot + slot * 0.4, (i + 1) * slot + slot * 0.4], [1, i === n - 1 ? 1 : 0.45]);
+  // Cards behind darken rather than fade, so no text shows through the card on top.
+  const dim = useTransform(progress, [i * slot + slot * 0.4, (i + 1) * slot + slot * 0.4], ["brightness(1)", i === n - 1 ? "brightness(1)" : "brightness(0.45)"]);
   return (
     <motion.article
-      style={{ x, scale, opacity: dim, top: i * 10, left: i * 14, background: TINTS[i % TINTS.length], zIndex: i }}
+      style={{ x, scale, filter: dim, top: i * 10, left: i * 14, background: TINTS[i % TINTS.length], zIndex: i }}
       className="absolute grid h-[min(64vh,560px)] w-[min(980px,calc(100%-6rem))] origin-left grid-cols-[1fr_1.1fr] gap-8 overflow-hidden rounded-[28px] border border-ink/10 p-8 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.8)]"
     >
       <div className="flex min-w-0 flex-col">

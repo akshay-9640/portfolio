@@ -5,19 +5,16 @@ import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Process from "./components/Process";
 import Chat from "./components/Chat";
-import Palette from "./components/Palette";
-import Certifications from "./components/Certifications";
 import Experience from "./components/Experience";
-import Achievements from "./components/Achievements";
 import Contact from "./components/Contact";
 import Intro from "./components/Intro";
+import TravelBadge from "./components/TravelBadge";
 
 export default function App() {
   return (
     <>
       <Intro />
       <Nav />
-      <Palette />
       <Chat />
       <main>
         <Hero />
@@ -25,11 +22,10 @@ export default function App() {
         <Skills />
         <Projects />
         <Process />
-        <Certifications />
         <Experience />
-        <Achievements />
         <Contact />
       </main>
+      <TravelBadge />
     </>
   );
 }

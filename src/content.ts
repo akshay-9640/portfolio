@@ -42,11 +42,10 @@ export const profile = {
   ],
 };
 
-// The animated intro shown on a visitor's first visit (spoken with the browser's voice).
+// The three-second hello on a visitor's first visit.
 export const intro = {
   greeting: "Hi, I'm Akshay.",
-  script:
-    "Hi, I'm Akshay Kumar, an AI engineer based in Orlando. I build AI agents that businesses can trust: grounded in their own documents, measured with evals, and taken from first prototype to production. Everything here is real and running. Click my photo on the map to explore my projects, or just say hello.",
+  line: "AI engineer in Orlando. Welcome to my work.",
   frames: { idle: "/intro/idle.webp", talk: "/intro/talk.webp", blink: "/intro/blink.webp" },
 };
 
@@ -66,7 +65,6 @@ export const headings: Record<string, Heading> = {
   process: { before: "How I", accent: "work." },
   certifications: { before: "Always", accent: "learning." },
   experience: { before: "Education &", accent: "experience." },
-  achievements: { before: "Proud", accent: "moments." },
   contact: { before: "Let's", accent: "connect." },
 };
 
@@ -357,14 +355,6 @@ export const gallery = [
   { src: "/photos/fiu-2.jpg", alt: "Akshay in FIU graduation regalia in front of the FIU backdrop" },
   { src: "/photos/fiu-3.jpg", alt: "Akshay at his FIU graduation" },
 ];
-
-export const achievements = [
-  { value: "4", label: "years in software engineering" },
-  { value: "6", label: "open-source AI projects with live demos" },
-  { value: "4", label: "Microsoft and AWS certifications" },
-  { value: "100%", label: "of quotes verified in the Pathwise and Underwise evals" },
-  { value: "M.S.", label: "Computer and Information Sciences, FIU" },
-]
 
 export const contact = {
   email: "akshaykumarboddu019@gmail.com",
