@@ -168,6 +168,23 @@ export const projects: {
   study: { problem: string; solution: string; result: string };
 }[] = [
   {
+    title: "LabLoop",
+    status: "Hackathon | Open source",
+    description:
+      "An experiment agent that proposes a step, runs independent measurements, records what happened and plans again from that evidence. Built for the Meta Global AI Developer Hackathon.",
+    tags: ["Muse Spark", "Fireworks", "Python", "SQLite", "Evals"],
+    github: "https://github.com/akshay-9640/Labloop",
+    flow: ["Model proposes an experiment", "Controls and limits checked in code", "Executor measures (tests or simulator)", "Evidence recorded in SQLite", "Plan again or stop with a reason"],
+    study: {
+      problem:
+        "An agent that iterates on experiments is only useful if you can see why it chose each step, and if failures, lost readings and spent budgets stay on the record instead of being hidden.",
+      solution:
+        "Each loop records the proposal, the measurement and the reason it stopped. The measurements come from test runs or a chemistry simulator, never the model. Pointed at known public bugs in python-dateutil and pypdf, Muse Spark 1.3 proposed patches that had to pass public checks, hidden checks it never saw, and every upstream test that passed before. Simulated chemistry campaigns used Muse Spark Open through Fireworks, with a read-only dashboard.",
+      result:
+        "Ten selected known bugs got locally verified patches, after disclosed iteration rounds rather than on the first try, for 19 model requests at an estimated $0.29 in total. Every failed attempt stays in the published evidence. These are known issues, not new discoveries or upstream-accepted fixes.",
+    },
+  },
+  {
     title: "Computer-Use Automation System",
     status: "Personal | Open source",
     description:
@@ -265,19 +282,34 @@ export const projects: {
     title: "Underwise",
     status: "Personal | Open source",
     description:
-      "Reviews commercial property insurance submissions before an underwriter opens them: every extracted value carries a quote verified in code, and five checks run in code, not in the model.",
-    tags: ["Claude", "FastAPI", "Document AI", "Evals"],
+      "Reviews insurance submissions before an underwriter opens them, for commercial property and commercial auto: every value keeps its source, conflicts keep both sides, and the underwriting rules run in code, not in the model.",
+    tags: ["Claude", "FastAPI", "Streamlit", "Document AI", "OCR", "Evals"],
     github: "https://github.com/akshay-9640/underwise",
     live: "https://underwise-blond.vercel.app/",
     image: "/projects/underwise.jpg",
-    flow: ["Broker email, PDFs, CSV", "Claude extracts each value with a quote", "Code verifies quotes, flags conflicts", "Five checks in code", "Summary + draft follow-up email"],
+    flow: ["Broker email + attachments", "Read, OCR and classify by content", "Extract each value with its source", "Code flags gaps and conflicts", "Guideline rules in code", "AI summary + draft follow-up"],
     study: {
       problem:
         "Underwriters lose time on submissions that are missing information or contradict themselves, and an AI extractor is risky if it can quietly invent or pick a value.",
       solution:
-        "Claude reads each document separately and returns values exactly as written, each with a verbatim quote. Code checks every quote is on the stated page, normalizes values, and keeps both sides of a disagreement instead of choosing one. Five rules (location count vs schedule, TIV referral threshold, sprinklers, loss history) run in plain code. Reviewers can correct a field and rerun the checks, and an Ask panel answers questions with verified citations.",
+        "Property: Claude returns each value exactly as written with a verbatim quote, code checks the quote is on the stated page, and five rules (location count, TIV referral threshold, sprinklers, loss history) run in plain code, with an Ask panel that answers with verified citations. Commercial auto: a zipped broker package is unpacked safely and deduplicated by hash, scans go through local OCR, parsers extract drivers, vehicles, MVRs, loss runs and IFTA filings with their sources, drivers and VINs are reconciled, and 16 guideline rules route, refer or decline. The model only sees a pseudonymized, allowlisted view, and the auto app has sign-in, roles and encryption at rest. In both, a reviewer correction changes the fact and reruns the rules with the original kept.",
       result:
-        "Across 3 live runs of 4 fictional packets: 258/258 field checks, 60/60 rule results and 195/195 quotes found on their stated page, with 117 offline tests. A planted instruction in a broker email had no effect.",
+        "Property: across 3 live runs of 4 fictional packets, 258/258 field checks, 60/60 rule results and 195/195 quotes found on their stated page; a planted instruction in a broker email had no effect. Commercial auto: 124 offline tests, and AI citations are validated against evidence IDs. 241 tests in total, run in CI.",
+    },
+  },
+  {
+    title: "Text Summarizer API",
+    status: "Personal | Open source",
+    description:
+      "A small FastAPI service: send a block of text and get back a short summary and exactly three action items as validated JSON.",
+    tags: ["FastAPI", "Python", "Structured Outputs"],
+    github: "https://github.com/akshay-9640/text-summarizer",
+    flow: ["Text in", "Clean and truncate", "LLM returns JSON", "Code checks the shape", "Summary + 3 action items"],
+    study: {
+      problem: "Model output is only usable by other code if its shape is guaranteed, including on empty or very long input.",
+      solution:
+        "The service cleans and truncates input, calls any OpenAI-compatible model (or a mock for offline runs), and checks the reply is a summary plus exactly three action items before returning it, retrying once if the model's JSON is malformed.",
+      result: "Three tests cover the JSON shape, empty input, and long input with a malformed model reply.",
     },
   },
 ];
